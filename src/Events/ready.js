@@ -21,6 +21,7 @@ module.exports = class extends Event {
             `${this.client.guilds.cache.reduce((a, b) => a + b.memberCount, 0)} users`
         ]
 
+
         let i = 0;
 
         setInterval(() => this.client.user.setActivity(`${this.client.prefix}help | ${activities[i++ % activities.length]}`, { type: 'WATCHING'}), 15000)

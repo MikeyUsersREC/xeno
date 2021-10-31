@@ -55,7 +55,7 @@ module.exports = class BotClient extends Client {
     async start(token = this.token) {
         this.utils.loadCommands();
         this.utils.loadEvents();
-        require('./Mongo').init()
+        require('./Database/Mongo').init()
         super.login(token)
     }
 }
