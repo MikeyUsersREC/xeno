@@ -42,7 +42,7 @@ module.exports = class extends Command {
             return message.channel.send('The MeaxisNetwork extension is already disabled.')
         }
 
-        if (args[0].toLowerCase() === 'roblox')) {
+        if (args[0].toLowerCase() === 'roblox') {
             GuildProfile.extensions.forEach((dataset) => { if (dataset['name'] === 'Roblox') dataset['status'] === false})
             await GuildProfile.save().catch(err => message.channel.send(err))
             return message.channel.send('Successfully disabled the Roblox extension.')
