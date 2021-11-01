@@ -54,7 +54,7 @@ module.exports = class extends Command {
 
                 for (let [key, value] of Object.entries(content)) {
                     if (value !== null && key !== 'titles') {
-                        print((key, value))
+                        console.log((key, value))
                         Embed.addField(Utils.capitalise(key), value)
                     }
                 } 
