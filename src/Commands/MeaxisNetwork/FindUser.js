@@ -53,7 +53,8 @@ module.exports = class extends Command {
                     .setThumbnail(content.avatar);
 
                 for (let [key, value] of Object.entries(content)) {
-                    if (value && key !== 'titles') {
+                    if (value !== null && key !== 'titles') {
+                        print((key, value))
                         Embed.addField(Utils.capitalise(key), value)
                     }
                 } 
