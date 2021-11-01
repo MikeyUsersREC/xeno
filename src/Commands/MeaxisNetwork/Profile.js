@@ -39,6 +39,8 @@ module.exports = class extends Command {
 
             if (value && key !== 'titles') {
                 Embed.addField({ name: Utils.capitalise(key), value: value, inline: false })
+                console.log(Embed)
+
             }
         } 
 
