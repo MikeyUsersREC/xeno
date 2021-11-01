@@ -22,7 +22,6 @@ module.exports = class extends Command {
         let content = await fetch(url)
             .then(content => content.json());
 
-        print(content)
         
 
         let Embed = new discord.MessageEmbed()
