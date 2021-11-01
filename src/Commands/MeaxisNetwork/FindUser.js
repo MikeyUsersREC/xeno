@@ -52,10 +52,12 @@ module.exports = class extends Command {
                     .setTitle(content.username)
                     .setThumbnail(content.avatar);
 
+                console.log(content)
+
                 for (let key in content) {
                     let value = content[key]
                     if (value && key !== 'titles') {
-                        Embed.addField(Utils.capitalise(key), value)
+                        Embed.addField({ name: Utils.capitalise(key), value: value, inline: false })
                     }
                 } 
 
@@ -86,11 +88,13 @@ module.exports = class extends Command {
                 .setTitle(content.username)
                 .setThumbnail(content.avatar);
 
+            console.log(content)
+
             for (let key in content) {
-                let value = content[key]
-                if (value && key !== 'titles') {
-                    Embed.addField(Utils.capitalise(key), value)
-                }
+            let value = content[key]
+            if (value && key !== 'titles') {
+            Embed.addField({ name: Utils.capitalise(key), value: value, inline: false })
+            }
             } 
 
             let list = []
