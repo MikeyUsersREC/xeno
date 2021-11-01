@@ -66,7 +66,8 @@ module.exports = class extends Command {
                 if (list) {
                     Embed.addField('Titles', list.join(', '))
                 }
-                
+                console.log(Embed)
+
                 await message.channel.send({ embeds: [Embed]})
             }
         } else if (choice  === 'username') {
