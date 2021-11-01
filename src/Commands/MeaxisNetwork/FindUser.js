@@ -59,7 +59,7 @@ module.exports = class extends Command {
                     if (key !== null && key !== undefined && key !== 'titles' && value !== null) {
                         console.log([key, typeof(key)])
                         console.log([value, typeof(value)])
-                        Embed.addField(key.toString()[0].toUpperCase() + key.split(1) ?? "Could not find variable", value.toString() ?? "null")
+                        Embed.addField(`${key.toString()[0].toUpperCase()}${key.split(1)}` ?? "Could not find variable", value.toString() ?? "null")
                         console.log(Embed)
         
                     }
@@ -100,7 +100,7 @@ module.exports = class extends Command {
                 if (key !== null && key !== undefined && key !== 'titles' && value !== null) {
                     console.log([key, typeof(key)])
                     console.log([value, typeof(value)])
-                    Embed.addField(key.toString()[0].toUpperCase() + key.split(1) ?? "Could not find variable", value.toString() ?? "null")
+                    Embed.addField(`${key.toString()[0].toUpperCase()}${key.split(1)}` ?? "Could not find variable", value.toString() ?? "null")
                     console.log(Embed)
     
                 }
