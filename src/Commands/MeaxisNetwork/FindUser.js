@@ -107,6 +107,7 @@ module.exports = class extends Command {
             if (list.length > 0) {
                 Embed.addField('Titles', list.join(', '))
             }
+            console.log(Embed)
             
             await message.channel.send({ embeds: [Embed]})
         }
