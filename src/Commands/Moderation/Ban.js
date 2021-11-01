@@ -36,7 +36,7 @@ module.exports = class extends Command {
 
         console.log([member_role, target_role])
         if (target_role > member_role && !message.member === message.guild.owner) {
-            return message.channel.send('You cannot ban this user since they are higher than you.')
+            return message.channel.send({ content: 'You cannot ban this user since they are higher than you.' })
         }
 
         const Embed = new Discord.MessageEmbed()
@@ -47,7 +47,7 @@ module.exports = class extends Command {
             .setColor(Util.getColor());
 
         if (target === message.guild.owner) {
-            return message.channel.send('You are not permitted to ban the server owner.')
+            return message.channel.send({ content: 'You are not permitted to ban the server owner.'})
         }
 
         // if (Member.roles.highest.position >= message.guild.members.cache.get(this.client.user.id).roles.highest.position) {
@@ -57,9 +57,9 @@ module.exports = class extends Command {
 
         try {
             target.ban({reason: `Requested by ${message.member.username}: ${reason}`, days: 7})
-            message.channel.send(Embed)
+            message.channel.send({ embeds: Embed })
         } catch(err) {
-            message.channel.send('An error has occured that has prevented your command from running correctly.')
+            message.channel.send( { content: 'An error has occured that has prevented your command from running correctly.' })
             console.error(err)
         }
     }

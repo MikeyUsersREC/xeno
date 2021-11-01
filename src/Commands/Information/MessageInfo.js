@@ -44,7 +44,7 @@ module.exports = class extends Command {
         console.log(typeof IdentifiedMessage)
 
         if (!IdentifiedMessage) {
-            return message.channel.send('Sorry, the provided Message ID could not be found in the current channel.')
+            return message.channel.send({ content:  'Sorry, the provided Message ID could not be found in the current channel.'})
         }
 
         console.log(IdentifiedMessage)
@@ -62,7 +62,7 @@ module.exports = class extends Command {
                 `**❯ Created At:** ${moment(IdentifiedMessage.createdTimestamp).format('LT')} ${moment(IdentifiedMessage.createdTimestamp).format('LL')} <t:${moment(IdentifiedMessage.createdTimestamp).unix()}:R>}`,
                 `**❯ Type:** \`${IdentifiedMessage.type}\``,
                 `**❯ URL:** ${IdentifiedMessage.url}`
-            ])       
+            ].join('\n'))       
 
             .addField('Author Information', [
                 `**❯ Username:** ${IdentifiedMessage.author.username}`,
@@ -75,7 +75,7 @@ module.exports = class extends Command {
                 `**❯ System Account:** ${CheckOrCross(IdentifiedMessage.author.system)}`,
                 `**❯ Bot Account:** ${CheckOrCross(IdentifiedMessage.author.bot)}`,
                 `**❯ Partial:** ${CheckOrCross(IdentifiedMessage.author.partial)}`
-            ])
+            ].join('\n'))
 
 
             .addField('Other', [
@@ -86,10 +86,10 @@ module.exports = class extends Command {
                 `**❯ Deleted:** ${CheckOrCross(IdentifiedMessage.deleted)}`,
                 `**❯ Crosspostable:** ${CheckOrCross(IdentifiedMessage.crosspostable)}`,
                 `**❯ From Webhook:** ${CheckOrCross(message.webhookId ? true : false)}`
-            ])
+            ].join('\n'))
             .setThumbnail(IdentifiedMessage.author.avatarURL({ dynamic: true }))
             .setTimestamp();
         
-        message.channel.send(Embed)
+        message.channel.send({ embeds: [Embed]})
     }
 }

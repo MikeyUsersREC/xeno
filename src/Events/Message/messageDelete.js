@@ -14,7 +14,7 @@ module.exports = class extends Event {
                 `**❯ Message ID:** ${message.id}`,
                 `**❯ Channel:** ${message.channel}`,
                 `**❯ Author:** ${message.member.displayName}`,
-            ])
+            ].join('\n'))
 
     if (message.content.length) {
         embed.splitFields(`**❯ Deleted Message:** ${message.content}`)

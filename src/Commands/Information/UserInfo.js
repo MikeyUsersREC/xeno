@@ -36,7 +36,7 @@ module.exports = class extends Command {
         const member = util.findMember(this.client, message, target, false)
 
         if (!member) {
-            return message.channel.send('You have not entered a user object.')
+            return message.channel.send({ content: 'You have not entered a user object.'})
         }
         
         const roles = member.roles.cache.sort((a, b) => b.position - a.position).map(role => role.toString()).slice(0, -1)
@@ -56,7 +56,7 @@ module.exports = class extends Command {
                 `**❯ Status:** ${member.user.presence.status}`,
                 `**❯ Game:** ${member.user.presence.game || "Not playing a game."}`,
                 "\u200b",
-            ])
+            ].join('\n'))
 
             .addField('Member Properties', [
                 `**❯ Highest Role:** ${member.roles.highest.id === message.guild.id ? 'None' : member.roles.highest.name}`,
@@ -64,12 +64,12 @@ module.exports = class extends Command {
                 `**❯ Hoist Role:** ${member.roles.hoist ? member.roles.hoist.name : "None"}`,
                 `**❯ Roles [${roles.length}]:** ${roles.length < 10 ? roles.join(',\n') : roles.length > 10 ? this.client.utils.trimArray(roles) : 'None'}`,
                 "\u200b",
-            ])
+            ].join('\n'))
 
 
             .setColor(member.displayHexColor || util.getColor())
     
 
-        message.channel.send(embed)
+        message.channel.send({ embeds: [embed]})
 }
 }

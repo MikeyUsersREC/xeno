@@ -9,7 +9,9 @@ module.exports = class extends Command {
             aliases: ['ev'],
             description: 'Evaluates code on behalf of the bot.',
             category: 'Owner',
-            ownerOnly: true
+            ownerOnly: true,
+            args: true,
+            usage: '<Code>'
         })
     }
 
@@ -28,7 +30,6 @@ module.exports = class extends Command {
 
         const msg = message;
 
-        if (!args.length) return message.channel.send('I need code to evaluate!')
         let code = args.join(' ');
         let evaluated;
         try {
@@ -54,7 +55,7 @@ module.exports = class extends Command {
                 await msg.channel.send(output)
             }
         } catch (err) {
-            throw err
+            console.error(err)
         }
     }
 }

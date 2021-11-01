@@ -45,6 +45,6 @@ module.exports = class extends Command {
             Embed.addField('Titles', list.join(', '))
         }
         
-        await message.channel.send(Embed)
+        await message.channel.send({ embeds: [Embed]})
     }
 }

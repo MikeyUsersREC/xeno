@@ -13,11 +13,11 @@ module.exports = class extends Command {
 
     async run(message) {
 
-        if (!message.member.voice.channel) return message.channel.send('You are not in a voice channel!')
+        if (!message.member.voice.channel) return message.channel.send({ content: 'You are not in a voice channel!'})
 
         this.client.distube.pause()
 
-        member.channel.send('Paused the queue!')
+        member.channel.send({ content: 'Paused the queue!'})
     }
 
 

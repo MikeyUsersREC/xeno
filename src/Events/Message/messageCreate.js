@@ -10,7 +10,7 @@ module.exports = class extends Event {
             return
         }
 
-        if (message.content.match(mentionRegex)) message.channel.send(`My prefix for ${message.guild.name} is \`${this.client.prefix}\`.`)
+        if (message.content.match(mentionRegex)) message.channel.send({ content: `My prefix for ${message.guild.name} is \`${this.client.prefix}\`.`})
 
         const prefix = message.content.match(mentionRegexPrefix) ?
             message.content.match(mentionRegexPrefix)[0] : this.client.prefix;
@@ -31,7 +31,27 @@ module.exports = class extends Event {
                 return message.reply('Sorry, this command can only be used in a NSFW channel.')
             }
 
+            let GuildProfile = await require('../../Structures/Database/Schemas/Guild').findOne({ GuildId: message.guild.id })
 
+            if (!GuildProfile) {
+                GuildProfile = await new Guild({
+                    _id: Mongoose.Types.ObjectId(),
+                    GuildId: message.guild.id,
+                    extensions: [
+                        { name: 'MeaxisNetwork', status: false},
+                        { name: 'Roblox', status: false}
+                    ]
+                })
+            }
+
+            if (GuildProfile.extensions[0]['status'] === false && command.category === 'MeaxisNetwork') {
+                return message.channel.send({ content: 'This command is not enabled on this server.'})
+            }
+
+            if (GuildProfile.extensions[1]['status'] === false && command.category === 'Roblox') {
+                return message.channel.send({ content: 'This command is not enabled on this server.'})
+            }
+            
             if (command.args && !args.length) {
                 return message.reply(`Sorry, this command requires arguments to function. Usage ${command.usage ? `${command.usage}` : 'This command doesn\'t have a usage format.'}`)
             }

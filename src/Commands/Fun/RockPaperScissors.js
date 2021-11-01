@@ -32,9 +32,9 @@ module.exports = class extends Command {
                 .addField(this.client.user.username, `${picked.replace(/^\w/, (c) => c.toUpperCase())}`)
                 .setTimestamp()
 
-            message.channel.send(Embed)
+            message.channel.send({ embeds: [Embed]})
         } else {
-            return message.channel.send("You have not picked a valid option. Options are [rock, paper, scissors]")
+            return message.channel.send({ content: "You have not picked a valid option. Options are [rock, paper, scissors]" })
         }
     }
 }

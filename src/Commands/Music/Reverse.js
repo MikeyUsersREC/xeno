@@ -11,10 +11,10 @@ module.exports = class extends Command {
     }
 
     async run(message) {
-        if (!message.member.voice.channel) return message.channel.send('You are not in a voice channel!')
+        if (!message.member.voice.channel) return message.channel.send({ content: 'You are not in a voice channel!'})
 
         this.client.distube.setFilter(message, 'reverse')
 
-        message.channel.send('The Reverse filter has been enabled/disabled.')
+        message.channel.send({ content: 'The Reverse filter has been toggled.'})
     }
 }

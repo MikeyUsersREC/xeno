@@ -10,10 +10,10 @@ module.exports = class extends Command {
     }
 
     async run(message) {
-        const msg = await message.channel.send('Pinging from CSA...')
+        const msg = await message.channel.send({ content: 'Pinging from CSA...' })
 
         const latency = msg.createdTimestamp - message.createdTimestamp
 
-        msg.edit(`Latency: \`${latency}ms\`\nAPI Latency: \`${Math.round(this.client.ws.ping)}ms\``)
+        msg.edit({ content: `Latency: \`${latency}ms\`\nAPI Latency: \`${Math.round(this.client.ws.ping)}ms\``})
     }
 }

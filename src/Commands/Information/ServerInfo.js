@@ -62,7 +62,7 @@ module.exports = class extends Command {
                 `**❯ Verification Level:** ${verificationLevels[message.guild.verificationLevel]}`,
                 `**❯ Time Created:** ${moment(message.guild.createdTimestamp).format('LT')} ${moment(message.guild.createdTimestamp).format('LL')} <t:${moment(message.guild.createdTimestamp).unix()}:R>`,
                 '\u200b'
-            ])
+            ].join('\n'))
             .addField('Statistics', [
                 `**❯ Role Count:** ${roles.length}`,
                 `**❯ Emoji Count:** ${emojis.size}`,
@@ -75,7 +75,7 @@ module.exports = class extends Command {
                 `**❯ Voice Channels:** ${channels.filter(channel => channel.type === "voice").size}`,
                 `**❯ Boost Count:** ${message.premiumSubscriptionCount || 0}`,
                 '\u200b'
-            ])
+            ].join('\n'))
 
             .addField('Presence', [
                 `**❯ Online:** ${members.filter(member => member.presence.status === "online").size}`,
@@ -83,11 +83,11 @@ module.exports = class extends Command {
                 `**❯ Do Not Disturb:** ${members.filter(member => member.presence.status === "dnd").size}`,
                 `**❯ Offline:** ${members.filter(member => member.presence.status === "offline").size}`,
                 '\u200b'
-            ])
+            ].join('\n'))
     
 
             .addField(`Roles [${roles.length - 1 }]`, roles.length < 10 ? roles.join(',\n') : roles.length > 10 ? this.client.utils.trimArray(roles) : "None")
             .setTimestamp();
-        message.channel.send(embed)
+        message.channel.send({ embeds: [embed]})
         }
 }

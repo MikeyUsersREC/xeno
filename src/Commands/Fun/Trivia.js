@@ -24,13 +24,13 @@ module.exports = class extends Command {
             .setDescription(question.all_answers.join('\n'))
         
 
-        message.channel.send(Embed)
+        message.channel.send({ embeds: Embed})
 
         await message.channel.awaitMessages(msg => msg.author === message.author, { max: 1, time: 15000}).then(collected => {
             if (collected.first().content.toLowerCase() === question.correct_answer.toLowerCase()) {
-                return message.channel.send('Correct! You successfully answered that question.')
+                return message.channel.send({ content: 'Correct! You successfully answered that question.'})
             } else {
-                return message.channel.send(`Unfortunately, your answer was incorrect. The correct answer was **${question.correct_answer}**.`)
+                return message.channel.send({ content: `Unfortunately, your answer was incorrect. The correct answer was **${question.correct_answer}**.`})
         }})
     }
 }

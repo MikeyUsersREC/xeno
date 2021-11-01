@@ -16,11 +16,13 @@ module.exports = class extends Command {
     async run(message, ...args) {
         let limit = parseInt(args[0]);
 
+        if (limit > 100 || limit === 100) limit = 99
+
         message.delete()
 
         message.channel.messages.fetch( { limit: limit })
             .then(messages => message.channel.bulkDelete(messages));
 
-        message.channel.send(`Successfully deleted ${limit} messages, requested by ${message.author.username}.`)
+        message.channel.send({ content: `Successfully deleted ${limit} messages, requested by ${message.author.username}.` })
     }
 }

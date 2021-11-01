@@ -14,12 +14,12 @@ module.exports = class extends Command {
 
     async run(message) {
 
-        if (!message.member.voice.channel) return message.channel.send('You are not in a voice channel!')
+        if (!message.member.voice.channel) return message.channel.send({ content: 'You are not in a voice channel!'})
 
         const queue = this.client.distube.getQueue(message)
 
         if (!queue) {
-            return message.channel.send('No queue available.')
+            return message.channel.send({ content: 'No queue available.'})
         }
     
         const Embed = new MessageEmbed()
@@ -31,8 +31,8 @@ module.exports = class extends Command {
 
         console.log(queue.songs)
         
-        queue.songs.map((song, id) => Embed.addField(song.name, [`Duration: ${song.formattedDuration}`, `Views: ${song.views}`,  `Likes: ${song.likes}`, `Video: [Watch on YouTube](${song.url})`]))
-        message.channel.send(Embed)
+        queue.songs.map((song, id) => Embed.addField(song.name, [`Duration: ${song.formattedDuration}`, `Views: ${song.views}`,  `Likes: ${song.likes}`, `Video: [Watch on YouTube](${song.url})`].join('\n')))
+        message.channel.send({ embeds: [Embed]})
 
     }
 

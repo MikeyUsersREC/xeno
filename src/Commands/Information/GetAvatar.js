@@ -17,8 +17,8 @@ module.exports = class extends Command {
         const member = new util().findMember(this.client, message, target)
 
         if (!member) {
-            return message.channel.send('Sorry, you have not provided a valid member.')
+            return message.channel.send({ content: 'Sorry, you have not provided a valid member.'})
         }
-        message.reply(member.user.avatarURL({ dynamic: true }) || member.avatarURL({ dynamic: true}))
+        message.channel.send({ content: member.user.avatarURL({ dynamic: true }) || member.avatarURL({ dynamic: true})})
     }
 }

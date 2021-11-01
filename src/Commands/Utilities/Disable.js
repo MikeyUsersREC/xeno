@@ -10,7 +10,8 @@ module.exports = class extends Command {
             category: 'Utilities',
             args: true,
             userPerms: ['ADMINISTRATOR'],
-            guildOnly: true
+            guildOnly: true,
+            usage: '<Extension>'
         })
     }
 
@@ -31,23 +32,23 @@ module.exports = class extends Command {
         }
 
         if (!args[0].toLowerCase() === 'meaxisnetwork' && !args[0].toLowerCase() === 'roblox') {
-            return message.channel.send('You have not put a valid extension [\'MeaxisNetwork\', \'Roblox\']')
+            return message.channel.send({ content: 'You have not put a valid extension [\'MeaxisNetwork\', \'Roblox\']' })
         }
 
-        if (args[0].toLowerCase() === 'meaxisnetwork') {
-            GuildProfile.extensions.forEach((dataset) => { if (dataset['name'] === 'MeaxisNetwork') dataset['status'] === false})
-            await GuildProfile.save().catch(err => message.channel.send(err))
-            return message.channel.send('Successfully disabled the MeaxisNetwork extension.')
-        } else if (GuildProfile.extensions.forEach((dataset) => { if (dataset['name'] === 'MeaxisNetwork' && dataset['status'] === false) return true})) {
-            return message.channel.send('The MeaxisNetwork extension is already disabled.')
+        if (args[0].toLowerCase() === 'meaxisnetwork' && GuildProfile.extensions[0]['name'] === 'MeaxisNetwork' && GuildProfile.extensions[0]['status'] === true) {
+            GuildProfile.extensions.forEach((dataset) => { if (dataset['name'] === 'MeaxisNetwork') dataset['status'] = false})
+            await GuildProfile.save().catch(err => message.channel.send({content: err}))
+            return message.channel.send({ content: 'Successfully disabled the MeaxisNetwork extension.'})
+        } else if (GuildProfile.extensions[0]['name'] === 'MeaxisNetwork' && GuildProfile.extensions[0]['status'] === false) {
+            return message.channel.send({ content: 'The MeaxisNetwork extension is already disabled.'})
         }
 
         if (args[0].toLowerCase() === 'roblox') {
-            GuildProfile.extensions.forEach((dataset) => { if (dataset['name'] === 'Roblox') dataset['status'] === false})
-            await GuildProfile.save().catch(err => message.channel.send(err))
-            return message.channel.send('Successfully disabled the Roblox extension.')
+            GuildProfile.extensions.forEach((dataset) => { if (dataset['name'] === 'Roblox') dataset['status'] = false})
+            await GuildProfile.save().catch(err => message.channel.send({content: err}))
+            return message.channel.send({ content: 'Successfully disabled the Roblox extension.'})
         } else if (GuildProfile.extensions.forEach((dataset) => { if (dataset['name'] === 'Roblox' && dataset['status'] === false) return true})) {
-            return message.channel.send('The Roblox extension is already disabled.')
+            return message.channel.send({ content: 'The Roblox extension is already disabled.'})
         }
     }
 }

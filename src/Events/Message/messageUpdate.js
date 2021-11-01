@@ -16,7 +16,7 @@ module.exports = class extends Event {
                 `**❯ Message ID:** ${old.id}`,
                 `**❯ Channel:** ${old.channel}`,
                 `**❯ Author:** ${old.author.tag} (${old.author.id})`
-            ])
+            ].join('\n'))
             .setURL(old.url)
             // .splitFields(diffWordsWithSpace(escapeMarkdown(old.content), escapeMarkdown(message.content))
             //     .map(result => result.added ? `**${result.value}**` : result.removed ? `~~${result.value}~~` : result.value)

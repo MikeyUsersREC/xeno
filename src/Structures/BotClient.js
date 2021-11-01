@@ -12,7 +12,7 @@ module.exports = class BotClient extends Client {
         this.validate(options)
 
 
-        this.distube = new DisTube(this, { searchSongs: false, emitNewSongOnly: true})
+        this.distube = new DisTube.DisTube(this)
         this.commands = new Collection();
         this.aliases = new Collection();
         this.utils = new Util(this);
@@ -21,16 +21,16 @@ module.exports = class BotClient extends Client {
 
         this.distube
             .on("playSong", (message, queue, song) => message.channel.send(
-                `Playing \`${song.name}\` - \`${song.formattedDuration}\`\nRequested by: ${song.user}`
+                { content: `Playing \`${song.name}\` - \`${song.formattedDuration}\`\nRequested by: ${song.user}`}
             ))
             .on("addSong", (message, queue, song) => message.channel.send(
-                `Added ${song.name} - \`${song.formattedDuration}\` to the queue by ${song.user}`
+                { content: `Added ${song.name} - \`${song.formattedDuration}\` to the queue by ${song.user}`}
             ))
             .on("playList", (message, queue, playlist, song) => message.channel.send(
-                `Play \`${playlist.name}\` playlist (${playlist.songs.length} songs).\nRequested by: ${song.user}\nNow playing \`${song.name}\` - \`${song.formattedDuration}\``
+                { content: `Play \`${playlist.name}\` playlist (${playlist.songs.length} songs).\nRequested by: ${song.user}\nNow playing \`${song.name}\` - \`${song.formattedDuration}\``}
             ))
             .on("addList", (message, queue, playlist) => message.channel.send(
-                `Added \`${playlist.name}\` playlist (${playlist.songs.length} songs) to queue\n`
+                { content: `Added \`${playlist.name}\` playlist (${playlist.songs.length} songs) to queue\n`}
             ))
 
     }

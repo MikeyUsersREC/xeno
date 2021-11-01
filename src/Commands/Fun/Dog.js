@@ -28,6 +28,6 @@ module.exports = class extends Command {
             .then(body => body.data);
         let selected = data[Math.floor(Math.random() * data.length)]
 
-        return message.channel.send(`https://imgur.com/${selected.hash}${selected.ext.replace(/\?.*/, '')}`)
+        return message.channel.send({ content: `https://imgur.com/${selected.hash}${selected.ext.replace(/\?.*/, '')}`})
     }
 }

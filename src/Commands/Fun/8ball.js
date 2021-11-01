@@ -21,6 +21,6 @@ module.exports = class extends Command {
     }
 
     async run(message) {
-        message.channel.send(`${message.content.endsWith('?') ? responses[Math.floor(Math.random() * responses.length)] : "You do not have a valid question."}`)
+        message.channel.send({ content: `${message.content.endsWith('?') ? responses[Math.floor(Math.random() * responses.length)] : "You do not have a valid question."}`})
     }
 }

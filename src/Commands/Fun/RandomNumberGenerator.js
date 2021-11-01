@@ -27,9 +27,9 @@ module.exports = class extends Command {
                     `❯ The number is ${randomNumber}`
                 ]);
 
-            message.channel.send(Embed)
-        } else {
-            message.channel.send('You have not provided 2 numbers.')
+                message.channel.send({ embeds: [Embed]})
+            } else {
+            message.channel.send({ content: 'You have not provided 2 numbers.'})
         }
     }
 }
