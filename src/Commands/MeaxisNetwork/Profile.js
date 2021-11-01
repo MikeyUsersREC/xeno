@@ -36,13 +36,12 @@ module.exports = class extends Command {
         for (let key in content) {
             let value = content[key]
             console.log([key, value])
-
-            if (value && key !== 'titles') {
+            if (key !== null && key !== 'titles' && value !== null) {
                 Embed.addField({ name: `${key[0].toLowerCase()}${key.split(1)}`, value: toString(value), inline: false })
                 console.log(Embed)
 
             }
-        } 
+        }
 
         let list = []
         for (let key of content.titles) {
