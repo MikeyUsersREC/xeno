@@ -21,6 +21,8 @@ module.exports = class extends Command {
 
         let content = await fetch(url)
             .then(content => content.json());
+
+        print(content)
         
 
         let Embed = new discord.MessageEmbed()
@@ -30,7 +32,8 @@ module.exports = class extends Command {
             .setTitle(content.username)
             .setThumbnail(content.avatar);
 
-        for (let [key, value] of Object.entries(content)) {
+        for (let key of content) {
+            let value = content[key]
             if (value && key !== 'titles') {
                 Embed.addField(Utils.capitalise(key), value)
             }
