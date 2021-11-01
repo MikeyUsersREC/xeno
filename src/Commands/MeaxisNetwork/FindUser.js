@@ -53,16 +53,17 @@ module.exports = class extends Command {
                     .setThumbnail(content.avatar);
 
                 console.log(content)
-
                 for (let key in content) {
                     let value = content[key]
                     console.log([key, value])
-                    if (key !== null && key !== 'titles' && value !== null) {
-                        Embed.addField({ name: `${key[0].toLowerCase()}${key.split(1)}`, value: toString(value), inline: false })
+                    if (key !== null && key !== undefined && key !== 'titles' && value !== null) {
+                        console.log([key, typeof(key)])
+                        console.log([value, typeof(value)])
+                        Embed.addField(key.toString() ?? "Could not find variable", value.toString() ?? "null")
                         console.log(Embed)
         
                     }
-                } 
+                }
 
                 let list = []
                 for (let key of content.titles) {
@@ -96,8 +97,10 @@ module.exports = class extends Command {
             for (let key in content) {
                 let value = content[key]
                 console.log([key, value])
-                if (key !== null && key !== 'titles' && value !== null) {
-                    Embed.addField({ name: `${key[0].toLowerCase()}${key.split(1)}`, value: toString(value), inline: false })
+                if (key !== null && key !== undefined && key !== 'titles' && value !== null) {
+                    console.log([key, typeof(key)])
+                    console.log([value, typeof(value)])
+                    Embed.addField(key.toString() ?? "Could not find variable", value.toString() ?? "null")
                     console.log(Embed)
     
                 }
