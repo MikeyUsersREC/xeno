@@ -52,7 +52,7 @@ module.exports = class extends Command {
                     .setTitle(content.username)
                     .setThumbnail(content.avatar);
 
-                for (let key of content) {
+                for (let key in content) {
                     let value = content[key]
                     if (value && key !== 'titles') {
                         Embed.addField(Utils.capitalise(key), value)
@@ -86,7 +86,7 @@ module.exports = class extends Command {
                 .setTitle(content.username)
                 .setThumbnail(content.avatar);
 
-            for (let key of content) {
+            for (let key in content) {
                 let value = content[key]
                 if (value && key !== 'titles') {
                     Embed.addField(Utils.capitalise(key), value)
