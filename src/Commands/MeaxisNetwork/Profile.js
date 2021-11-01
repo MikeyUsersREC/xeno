@@ -39,7 +39,7 @@ module.exports = class extends Command {
             if (key !== null && key !== undefined && key !== 'titles' && value !== null) {
                 console.log([key, typeof(key)])
                 console.log([value, typeof(value)])
-                Embed.addField({ name: `${key[0].toLowerCase()}${key.split(1)}`, value: `${toString(value)}`, inline: false })
+                Embed.addField({ name: `${key}`, value: `${toString(value)}`, inline: false })
                 console.log(Embed)
 
             }
