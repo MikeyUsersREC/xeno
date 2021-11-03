@@ -30,8 +30,10 @@ module.exports = class extends Command {
             .setTimestamp()
 
         console.log(queue.songs)
+		
+		if (queue.songs.length > 25) { return message.channel.send({ content: 'Too many songs in queue.')
         
-        queue.songs.map((song, id) => Embed.fields.length > 25 ? Embed.addField(song.name, [`Duration: ${song.formattedDuration}`, `Views: ${song.views}`,  `Likes: ${song.likes}`, `Video: [Watch on YouTube](${song.url})`].join('\n')))
+        queue.songs.map((song, id) => Embed.addField(song.name, [`Duration: ${song.formattedDuration}`, `Views: ${song.views}`,  `Likes: ${song.likes}`, `Video: [Watch on YouTube](${song.url})`].join('\n')))
         message.channel.send({ embeds: [Embed]})
 
     }
