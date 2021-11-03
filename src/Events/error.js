@@ -9,7 +9,5 @@ module.exports = class extends Event {
     }
 
 	run(err) {
-		
 		console.error(err)
-
-}
+}}
