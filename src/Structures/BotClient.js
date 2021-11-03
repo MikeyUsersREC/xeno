@@ -19,21 +19,6 @@ module.exports = class BotClient extends Client {
         this.events = new Collection();
         this.owners = options.owners;
 
-        this.distube
-            .on("playSong", (message, queue, song) => message.reply(
-                { content: `Playing \`${song.name}\` - \`${song.formattedDuration}\`\nRequested by: ${song.user}`}
-            ))
-            .on("addSong", (message, queue, song) => message.channel.send(
-                { content: `Added ${song.name} - \`${song.formattedDuration}\` to the queue by ${song.user}`}
-            ))
-            .on("playList", (message, queue, playlist, song) => message.channel.send(
-                { content: `Play \`${playlist.name}\` playlist (${playlist.songs.length} songs).\nRequested by: ${song.user}\nNow playing \`${song.name}\` - \`${song.formattedDuration}\``}
-            ))
-            .on("addList", (message, queue, playlist) => message.channel.send(
-                { content: `Added \`${playlist.name}\` playlist (${playlist.songs.length} songs) to queue\n`}
-            ))
-
-    }
 
     validate(options) {
         if (typeof(options) !== 'object') throw new TypeError('options are not object, error go brrrr')
