@@ -11,13 +11,15 @@ module.exports = class BotClient extends Client {
         });
         this.validate(options)
 
+
         this.distube = new DisTube.DisTube(this)
         this.commands = new Collection();
         this.aliases = new Collection();
         this.utils = new Util(this);
         this.events = new Collection();
-        this.owners = options.owners;
+        this.owners = options.owners
 
+    }
 
     validate(options) {
         if (typeof(options) !== 'object') throw new TypeError('options are not object, error go brrrr')
