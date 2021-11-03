@@ -31,7 +31,7 @@ module.exports = class extends Command {
 
         console.log(queue.songs)
         
-        queue.songs.map((song, id) => Embed.addField(song.name, [`Duration: ${song.formattedDuration}`, `Views: ${song.views}`,  `Likes: ${song.likes}`, `Video: [Watch on YouTube](${song.url})`].join('\n')))
+        queue.songs.map((song, id) => if Embed.fields.length > 25 ? Embed.addField(song.name, [`Duration: ${song.formattedDuration}`, `Views: ${song.views}`,  `Likes: ${song.likes}`, `Video: [Watch on YouTube](${song.url})`].join('\n')))
         message.channel.send({ embeds: [Embed]})
 
     }
