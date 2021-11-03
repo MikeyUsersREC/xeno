@@ -11,7 +11,6 @@ module.exports = class BotClient extends Client {
         });
         this.validate(options)
 
-
         this.distube = new DisTube.DisTube(this)
         this.commands = new Collection();
         this.aliases = new Collection();
