@@ -20,7 +20,7 @@ module.exports = class BotClient extends Client {
         this.owners = options.owners;
 
         this.distube
-            .on("playSong", (message, queue, song) => message.channel.send(
+            .on("playSong", (message, queue, song) => message.reply(
                 { content: `Playing \`${song.name}\` - \`${song.formattedDuration}\`\nRequested by: ${song.user}`}
             ))
             .on("addSong", (message, queue, song) => message.channel.send(
