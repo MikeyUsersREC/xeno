@@ -53,8 +53,6 @@ module.exports = class extends Command {
                 `**❯ Flags:** ${userFlags.length ? userFlags.map(Flag => flags[Flag]).join(', ') : 'None'}`,
                 `**❯ Avatar:** [Link to avatar](${member.user.displayAvatarURL( { dynamic: true } )})`,
                 `**❯ Time Registered:** ${moment(member.user.createdTimestamp).format('LT')} ${moment(member.user.createdTimestamp).format('LL')} <t:${moment(member.user.createdTimestamp).unix()}:R>`,
-                `**❯ Status:** ${member.user.presence.status}`,
-                `**❯ Game:** ${member.user.presence.game || "Not playing a game."}`,
                 "\u200b",
             ].join('\n'))
 
