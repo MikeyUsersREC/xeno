@@ -31,7 +31,7 @@ module.exports = class extends Command {
 
         let target = args.join(' ')
 
-        let util = this.utils;
+        let util = this.client.utils;
         const member = util.findMember(this.client, message, target, false)
 
         if (!member) {
