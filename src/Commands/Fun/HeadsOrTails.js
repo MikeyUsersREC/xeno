@@ -31,7 +31,7 @@ module.exports = class extends Command {
         let msg = await message.channel.send({ embeds: [Embed]})
 
         const editMessage = () => [
-            await msg.edit({ embeds: [Embed.addField('Result', `${picked}!`)]})
+            msg.edit({ embeds: [Embed.addField('Result', `${picked}!`)]})
 
         ]
 
