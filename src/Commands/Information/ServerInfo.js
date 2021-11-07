@@ -44,7 +44,8 @@ module.exports = class extends Command {
 
     async run(message) {
         const roles = message.guild.roles.cache.sort((a, b) => b.position - a.position).map(role => role.toString());
-		const members = await message.guild.members.fetch().filter(member => member.presence)
+		let members = await message.guild.members.fetch()
+		members = members.filter(member => member.presence)
         const channels = message.guild.channels.cache
         const emojis = message.guild.emojis.cache
     
