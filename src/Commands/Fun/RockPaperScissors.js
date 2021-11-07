@@ -9,11 +9,14 @@ module.exports = class extends Command {
         super(...args, {
             aliases: ['rps', 'rock', 'paper', 'scissors', 'rpsgame'],
             description: 'Plays the \'Rock Paper Scissors game\'',
-            category: 'Fun'
+            category: 'Fun',
+            args: true,
+            usage: '<choice>'
         })
     }
 
-    async run(message, [choice]) {
+    async run(message, ...args) {
+        let choice = args[0];
         if (choice !== undefined) {
 
             const choices = [
