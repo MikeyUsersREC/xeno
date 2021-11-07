@@ -65,7 +65,7 @@ module.exports = class extends Command {
                 '\u200b'
             ].join('\n'))
             .addField('Statistics', [
-				`**❯ Approximate Member Count:** ${message.guild.approximateMemberCount ? message.guild.members.size}`,
+				`**❯ Approximate Member Count:** ${message.guild.approximateMemberCount ?? message.guild.members.size}`,
 				`**❯ Maximum Member Count:** ${message.guild.maximumMembers}`,
                 `**❯ Role Count:** ${roles.length}`,
                 `**❯ Emoji Count:** ${emojis.size}`,
