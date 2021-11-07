@@ -17,7 +17,7 @@ module.exports = class extends Command {
 
     async run(message, ...args) {
         let choice = args[0];
-        if (choice !== undefined) {
+        if (choice !== undefined && choices.includes(choice.toLowerCase())) {
 
             const choices = [
                 'rock',
