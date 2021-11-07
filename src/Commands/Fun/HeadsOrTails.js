@@ -35,6 +35,6 @@ module.exports = class extends Command {
 
         ]
 
-        setTimeout(editMessage(), 5000).catch(err => { console.log(err) })
+        setTimeout(editMessage().then(result => { console.log(result) }), 5000)
 }
 }
