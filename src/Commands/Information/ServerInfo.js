@@ -45,7 +45,6 @@ module.exports = class extends Command {
     async run(message) {
         const roles = message.guild.roles.cache.sort((a, b) => b.position - a.position).map(role => role.toString());
 		let members = await message.guild.members.fetch()
-		members = members.filter(member => member.presence)
         const channels = await message.guild.channels.fetch()
         const emojis = message.guild.emojis.cache
     
@@ -91,6 +90,8 @@ module.exports = class extends Command {
 
             .addField(`Roles [${roles.length - 1 }]`, roles.length < 10 ? roles.join(',\n') : roles.length > 10 ? this.client.utils.trimArray(roles) : "None")
             .setTimestamp();
+    
+            embed.fields.forEach((field) => { if (!typeof field.value === String) field.value = 'NotString'})
         message.channel.send({ embeds: [embed]})
-        }
+    }
 }
