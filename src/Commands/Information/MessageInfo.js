@@ -38,7 +38,7 @@ module.exports = class extends Command {
         console.log(id)
         console.log(typeof id)
 
-        let IdentifiedMessage = await message.channel.messages.fetch(id)
+        let IdentifiedMessage = await message.channel.messages.fetch(id).catch(err => { message.channel.send('Invalid Message ID.')})
         
         console.log(IdentifiedMessage);
         console.log(typeof IdentifiedMessage)
