@@ -7,7 +7,7 @@ module.exports = class BotClient extends Client {
     constructor(options = {}) {
         super({
             disableMentions: 'everyone',
-            intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_VOICE_STATES]
+            intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_VOICE_STATES, Intents.FLAGS.GUILD_MEMBERS]
         });
         this.validate(options)
 
