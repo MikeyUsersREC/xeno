@@ -15,7 +15,10 @@ module.exports = class extends Command {
         })
     }
 
-    async run(message, [first, second]) {
+    async run(message, ...args) {
+
+        let first = args[0]
+        let second = args[1]
         if (first !== undefined && second !== undefined) {
 
             const randomNumber = Math.floor(Math.random() * (parseInt(second) - parseInt(first)) + parseInt(first));
