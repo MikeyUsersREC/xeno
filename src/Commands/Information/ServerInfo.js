@@ -47,7 +47,7 @@ module.exports = class extends Command {
 		let members = await message.guild.members.fetch()
 		members = members.filter(member => member.presence)
         const channels = message.guild.channels.fetch()
-        const emojis = message.guild.emojis.fetch()
+        const emojis = message.guild.emojis.cache
     
         const embed = new MessageEmbed()
             .setDescription(`**Guild Information for ${message.guild.name}**`)
