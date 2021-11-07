@@ -9,7 +9,9 @@ module.exports = class extends Command {
         super(...args, {
             aliases: ['rng', 'pickanumber', 'numberpicker'],
             description: 'Picks a number between a selected range',
-            category: 'Fun'
+            category: 'Fun',
+            args: true,
+            usage: '<minimum> <maximum>'
         })
     }
 
