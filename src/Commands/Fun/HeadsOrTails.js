@@ -30,6 +30,10 @@ module.exports = class extends Command {
 
         let msg = message.channel.send({ embeds: [Embed]})
 
-        setTimeout(( msg.edit({ embeds: [Embed.addField('Result', `${picked}!`)]}) ), 5000)
+        const editMessage = () => [
+            msg.edit({ embeds: [Embed.addField('Result', `${picked}!`)]})
+        ]
+
+        setTimeout(editMessage(), 5000)
 }
 }
