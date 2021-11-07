@@ -35,6 +35,6 @@ module.exports = class extends Command {
 
         ]
 
-        setTimeout(editMessage(), 5000)
+        setTimeout(await editMessage(), 5000)
 }
 }
