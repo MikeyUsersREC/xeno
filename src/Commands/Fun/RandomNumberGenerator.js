@@ -25,7 +25,7 @@ module.exports = class extends Command {
                 .setTitle('Random Number Generator')
                 .addField(`Picked between ${first} and ${second}`, [
                     `❯ The number is ${randomNumber}`
-                ]);
+                ].join('\n'));
 
                 message.channel.send({ embeds: [Embed]})
             } else {
