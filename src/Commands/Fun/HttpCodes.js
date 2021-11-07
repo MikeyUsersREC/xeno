@@ -6,7 +6,9 @@ module.exports = class extends Command {
             name: 'httpcodes',
             aliases: ['httpcat', '404cat', 'cathttp'],
             description: 'Sends an image of a HTTP code represented by a cat',
-            category: 'Fun'
+            category: 'Fun',
+            args: true,
+            usage: '<code>'
         })
     }
 
