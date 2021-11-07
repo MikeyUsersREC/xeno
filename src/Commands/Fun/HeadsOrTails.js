@@ -17,7 +17,7 @@ module.exports = class extends Command {
             'Heads',
             'Tails'
         ]
-        const picked = choices[Math.floor() * choices.length]
+        const picked = choices[Math.floor(Math.random() * choices.length)]
 
         const Embed = new MessageEmbed()
             .setColor(Util.getColor())
