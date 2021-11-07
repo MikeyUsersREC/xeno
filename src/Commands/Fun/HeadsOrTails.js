@@ -30,6 +30,6 @@ module.exports = class extends Command {
 
         let msg = await message.channel.send({ embeds: [Embed]})
 
-        setTimeout(function() {msg.edit({ embeds: [Embed.addField('Result', `${picked}!`).setColor(picked === 'Heads' ? 0x3498DB : 0xE74C3C)]})}, 10000)
+        setTimeout(function() {msg.edit({ embeds: [Embed.addField('Result', `${picked}!`).setColor(picked === 'Heads' ? 0x3498DB : 0xE74C3C)]})}, 5000)
 }
 }
