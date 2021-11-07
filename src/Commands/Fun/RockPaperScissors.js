@@ -17,13 +17,12 @@ module.exports = class extends Command {
 
     async run(message, ...args) {
         let choice = args[0];
+        const choices = [
+            'rock',
+            'paper',
+            'scissors'
+        ];
         if (choice !== undefined && choices.includes(choice.toLowerCase())) {
-
-            const choices = [
-                'rock',
-                'paper',
-                'scissors'
-            ];
 
             const picked = choices[Math.floor(Math.random() * choices.length)]
 
