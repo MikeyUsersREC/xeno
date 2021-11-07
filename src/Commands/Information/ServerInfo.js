@@ -46,8 +46,8 @@ module.exports = class extends Command {
         const roles = message.guild.roles.cache.sort((a, b) => b.position - a.position).map(role => role.toString());
 		let members = await message.guild.members.fetch()
 		members = members.filter(member => member.presence)
-        const channels = message.guild.channels.cache
-        const emojis = message.guild.emojis.cache
+        const channels = message.guild.channels.fetch()
+        const emojis = message.guild.emojis.fetch()
     
         const embed = new MessageEmbed()
             .setDescription(`**Guild Information for ${message.guild.name}**`)
@@ -76,7 +76,7 @@ module.exports = class extends Command {
                 `**❯ Text Channels:** ${channels.filter(channel => channel.type === "text").size}`,
                 `**❯ Voice Channels:** ${channels.filter(channel => channel.type === "voice").size}`,
                 `**❯ Boost Count:** ${message.premiumSubscriptionCount || 0}`,
-				`**❯ Sticker Count: ${message.guild.stickers.size}**`,
+				`**❯ Sticker Count:** ${message.guild.stickers.cache.size}`,
                 '\u200b'
             ].join('\n'))
 
