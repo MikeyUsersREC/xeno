@@ -1,7 +1,6 @@
 const Command = require('../../Structures/Command.js')
 const { MessageEmbed } = require('discord.js');
 const moment = require('moment')
-let util = require('../../Structures/Util')
 
 const flags = {
 	DISCORD_EMPLOYEE: 'Discord Employee',
@@ -32,7 +31,7 @@ module.exports = class extends Command {
 
         let target = args.join(' ')
 
-        util = new util();
+        let util = this.utils;
         const member = util.findMember(this.client, message, target, false)
 
         if (!member) {
