@@ -90,6 +90,8 @@ module.exports = class extends Command {
 
             .addField(`Roles [${roles.length - 1 }]`, roles.length < 10 ? roles.join(',\n') : roles.length > 10 ? this.client.utils.trimArray(roles) : "None")
             .setTimestamp();
+
+            embed.fields.forEach((field) => { if (typeof field.value === String) field.value = 'NotString'})
         
             message.channel.send({ embeds: [embed]})
     }
