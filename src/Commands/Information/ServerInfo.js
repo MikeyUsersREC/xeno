@@ -65,6 +65,8 @@ module.exports = class extends Command {
                 '\u200b'
             ].join('\n'))
             .addField('Statistics', [
+				`**❯ Approximate Member Count:** ${message.guild.approximateMemberCount}`,
+				`**❯ Maximum Member Count:** ${message.guild.maximumMembers}`
                 `**❯ Role Count:** ${roles.length}`,
                 `**❯ Emoji Count:** ${emojis.size}`,
                 `**❯ Regular Emoji Count:** ${emojis.filter(emoji => !emoji.animated).size}`,
@@ -75,6 +77,7 @@ module.exports = class extends Command {
                 `**❯ Text Channels:** ${channels.filter(channel => channel.type === "text").size}`,
                 `**❯ Voice Channels:** ${channels.filter(channel => channel.type === "voice").size}`,
                 `**❯ Boost Count:** ${message.premiumSubscriptionCount || 0}`,
+				`**❯ Sticker Count: ${message.guild.stickers.size}**`
                 '\u200b'
             ].join('\n'))
 
