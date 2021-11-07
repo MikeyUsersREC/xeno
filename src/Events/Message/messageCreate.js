@@ -75,6 +75,7 @@ module.exports = class extends Event {
 				}
             }
 
+            console.log(`Invoked ${command.name} by ${message.author.username}`)
 			command.run(message, ...args);
         }
     }
