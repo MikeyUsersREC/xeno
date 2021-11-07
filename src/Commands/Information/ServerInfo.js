@@ -79,13 +79,13 @@ module.exports = class extends Command {
                 '\u200b'
             ].join('\n'))
 
-            .addField('Presence', [
-                `**❯ Online:** ${presences.filter(member => member.presence.status === "online").size}`,
-                `**❯ Idle:** ${presences.filter(member => member.presence.status === "idle").size}`,
-                `**❯ Do Not Disturb:** ${presences.filter(member => member.presence.status === "dnd").size}`,
-                `**❯ Offline:** ${presences.filter(member => member.presence.status === "offline").size}`,
-                '\u200b'
-            ].join('\n'))
+            // .addField('Presence', [
+            //     `**❯ Online:** ${presences.filter(member => member.presence.status === "online").size}`,
+            //     `**❯ Idle:** ${presences.filter(member => member.presence.status === "idle").size}`,
+            //     `**❯ Do Not Disturb:** ${presences.filter(member => member.presence.status === "dnd").size}`,
+            //     `**❯ Offline:** ${presences.filter(member => member.presence.status === "offline").size}`,
+            //     '\u200b'
+            // ].join('\n'))
     
 
             .setTimestamp();        
