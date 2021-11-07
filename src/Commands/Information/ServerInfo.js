@@ -44,7 +44,8 @@ module.exports = class extends Command {
 
     async run(message) {
         const roles = message.guild.roles.cache.sort((a, b) => b.position - a.position).map(role => role.toString());
-		let members = await message.guild.members.fetch()
+		const members = await message.guild.members.fetch()
+        const presences = message.guild.members.cache.filter((member) => member.presence !== null)
         const channels = await message.guild.channels.fetch()
         const emojis = message.guild.emojis.cache
     
@@ -75,23 +76,21 @@ module.exports = class extends Command {
                 `**❯ Text Channels:** ${channels.filter(channel => channel.type === "text").size}`,
                 `**❯ Voice Channels:** ${channels.filter(channel => channel.type === "voice").size}`,
                 `**❯ Boost Count:** ${message.premiumSubscriptionCount || 0}`,
-				`**❯ Sticker Count:** ${message.guild.stickers.cache.size}`,
                 '\u200b'
             ].join('\n'))
 
             .addField('Presence', [
-                `**❯ Online:** ${members.filter(member => member.presence.status === "online").size}`,
-                `**❯ Idle:** ${members.filter(member => member.presence.status === "idle").size}`,
-                `**❯ Do Not Disturb:** ${members.filter(member => member.presence.status === "dnd").size}`,
-                `**❯ Offline:** ${members.filter(member => member.presence.status === "offline").size}`,
+                `**❯ Online:** ${presences.filter(member => member.presence.status === "online").size}`,
+                `**❯ Idle:** ${presences.filter(member => member.presence.status === "idle").size}`,
+                `**❯ Do Not Disturb:** ${presences.filter(member => member.presence.status === "dnd").size}`,
+                `**❯ Offline:** ${presences.filter(member => member.presence.status === "offline").size}`,
                 '\u200b'
             ].join('\n'))
     
 
             .addField(`Roles [${roles.length - 1 }]`, roles.length < 10 ? roles.join(',\n') : roles.length > 10 ? this.client.utils.trimArray(roles) : "None")
             .setTimestamp();
-    
-            embed.fields.forEach((field) => { if (!typeof field.value === String) field.value = 'NotString'})
-        message.channel.send({ embeds: [embed]})
+        
+            message.channel.send({ embeds: [embed]})
     }
 }
