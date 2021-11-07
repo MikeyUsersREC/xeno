@@ -56,7 +56,7 @@ module.exports = class extends Command {
             .addField('General', [
                 `**❯ Name:** ${message.guild.name}`,
                 `**❯ ID:** ${message.guild.id}`,
-                `**❯ Owner:** ${message.guild.owner || 'N/A'} \`${message.guild.ownerID || "Not Found"}\``,
+                `**❯ Owner:** ${await message.guild.fetchOwner() || 'N/A'} \`${await message.guild.fetchOwner().id || "Not Found"}\``,
                 `**❯ Region:** ${regions[message.guild.region]}`,
                 `**❯ Boost Tier:** ${message.guild.premiumTier ? `Tier ${message.guild.premiumTier}` : 'None'}`,
                 `**❯ Explicit Filter:** ${filterLevels[message.guild.explicitContentFilter]}`,
@@ -88,11 +88,7 @@ module.exports = class extends Command {
             ].join('\n'))
     
 
-            .addField(`Roles [${roles.length - 1 }]`, roles.length < 10 ? roles.join(',\n') : roles.length > 10 ? this.client.utils.trimArray(roles) : "None")
-            .setTimestamp();
-
-            embed.fields.forEach((field) => { if (typeof field.value === String) field.value = 'NotString'})
-        
+            .setTimestamp();        
             message.channel.send({ embeds: [embed]})
     }
 }
