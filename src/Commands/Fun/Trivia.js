@@ -24,7 +24,7 @@ module.exports = class extends Command {
             .setDescription(question.all_answers.join('\n'))
         
 
-        message.channel.send({ embeds: Embed})
+        message.channel.send({ embeds: [Embed]})
 
         await message.channel.awaitMessages(msg => msg.author === message.author, { max: 1, time: 15000}).then(collected => {
             if (collected.first().content.toLowerCase() === question.correct_answer.toLowerCase()) {
