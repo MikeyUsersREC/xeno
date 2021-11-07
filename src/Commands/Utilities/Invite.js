@@ -20,9 +20,8 @@ module.exports = class extends Command {
                 Permissions.FLAGS.SEND_MESSAGES,
             ],
             
-            scope: [
-                'bot',
-                'application.commands'
+            scopes: [
+                'bot'
             ]
         })
 
