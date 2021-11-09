@@ -25,7 +25,7 @@ module.exports = class extends Command {
     }
 
     async run(message) {
-        const data = await fetch(`https://imgur.com/r/${subreddits[Math.floor(Math.random() * subreddits.length)]}/hot.json`)
+        const data = await fetch(`https://imgur.com/r/${subreddits[Math.floor(Math.random() * subreddits.length)]}/top50.json`)
             .then(response => response.json())
             .then(body => body.data);
             let selected = data[Math.floor(Math.random() * data.length)]
