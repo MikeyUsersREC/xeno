@@ -28,9 +28,9 @@ module.exports = class extends Command {
 
         await message.channel.awaitMessages(msg => msg.author === message.author, { max: 1, time: 15000}).then(collected => {
             if (collected.first().content.toLowerCase() === question.correct_answer.toLowerCase()) {
-                return await message.channel.send({ content: 'Correct! You successfully answered that question.'})
+                return message.channel.send({ content: 'Correct! You successfully answered that question.'})
             } else {
-                return await message.channel.send({ content: `Unfortunately, your answer was incorrect. The correct answer was **${question.correct_answer}**.`})
+                return message.channel.send({ content: `Unfortunately, your answer was incorrect. The correct answer was **${question.correct_answer}**.`})
         }})
     }
 }
