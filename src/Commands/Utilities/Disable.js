@@ -37,7 +37,7 @@ module.exports = class extends Command {
 
         if (args[0].toLowerCase() === 'meaxisnetwork' && GuildProfile.extensions[0]['name'] === 'MeaxisNetwork' && GuildProfile.extensions[0]['status'] === true) {
             GuildProfile.extensions.forEach((dataset) => { if (dataset['name'] === 'MeaxisNetwork') dataset['status'] = false})
-            await GuildProfile.save().catch(err => await message.channel.send({content: err}))
+            await GuildProfile.save().catch(err => message.channel.send({content: err}))
             return await message.channel.send({ content: 'Successfully disabled the MeaxisNetwork extension.'})
         } else if (GuildProfile.extensions[0]['name'] === 'MeaxisNetwork' && GuildProfile.extensions[0]['status'] === false) {
             return await message.channel.send({ content: 'The MeaxisNetwork extension is already disabled.'})
