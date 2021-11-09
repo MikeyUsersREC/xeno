@@ -33,4 +33,5 @@ module.exports = class extends Command {
         } else {
             return await message.channel.send({ content: 'An unknown error occured. Try running this command again and if this continues, contact Mikey#8970 for further support.'})
         }
+    }
 }
