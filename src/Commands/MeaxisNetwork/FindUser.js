@@ -24,7 +24,7 @@ module.exports = class extends Command {
         console.log(query)
 
         if (choice.toLowerCase() !== 'discord' && choice.toLowerCase() !== 'username') {
-            return message.channel.send({ content: 'You have not put a correct first argument. Correct arguments are: [\'discord\', \'username\']'})
+            return await message.channel.send({ content: 'You have not put a correct first argument. Correct arguments are: [\'discord\', \'username\']'})
         }
 
     
@@ -36,7 +36,7 @@ module.exports = class extends Command {
 
             if (!Member) {
                 console.log('not member [success]')
-                return message.channel.send({ content: `Could not find a member with your query. Query: ${query}`})
+                return await message.channel.send({ content: `Could not find a member with your query. Query: ${query}`})
             } else {
                 console.log('member [success]')
                 let url = `https://api.meaxisnetwork.net/v3/users/search?from=discord&query=${Member.id}`;

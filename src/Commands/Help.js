@@ -24,7 +24,7 @@ module.exports = class extends Command {
         if (command) {
             const cmd = this.client.commands.get(command) || this.client.commands.get(this.client.aliases.get(command))
 
-            if (!cmd) return message.channel.send({ content: `Invalid command name:\n\`${command}\`` })
+            if (!cmd) return await message.channel.send({ content: `Invalid command name:\n\`${command}\`` })
 
             embed.setAuthor(`${this.client.utils.capitalise(cmd.name)} Command Help`, this.client.user.displayAvatarURL());
             embed.setDescription([
@@ -34,7 +34,7 @@ module.exports = class extends Command {
                 `**❯ Usage:** ${cmd.usage}`,
             ].join('\n'))
 
-            message.channel.send({ embeds: [embed]})
+            await message.channel.send({ embeds: [embed]})
         
         } else {
             embed.setDescription([
@@ -74,7 +74,7 @@ module.exports = class extends Command {
                 )
             ]
 
-            const initalMessage = message.channel.send( { embeds: [embed], components: components(false) } )
+            const initalMessage = await message.channel.send( { embeds: [embed], components: components(false) } )
 
             const filter = (interaction) => interaction.user.id === message.author.id;
 

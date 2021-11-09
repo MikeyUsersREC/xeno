@@ -47,6 +47,6 @@ module.exports = class extends Command {
             .setTimestamp()
 
 
-        message.channel.send({ embeds: [embed]})
+        await message.channel.send({ embeds: [embed]})
     }
 }

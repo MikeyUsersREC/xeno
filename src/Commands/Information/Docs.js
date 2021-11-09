@@ -20,11 +20,11 @@ module.exports = class extends Command {
         const embed = await docFetch.json();
 
         if (!embed || embed.error) {
-            return message.channel.send({ content: `"${query}" couldn't be located within the discord.js documentation (<https://discord.js.org>)`})
+            return await message.channel.send({ content: `"${query}" couldn't be located within the discord.js documentation (<https://discord.js.org>)`})
         }
 
         if (!message.guild) {
-            return message.channel.send({ embeds: [embed] })
+            return await message.channel.send({ embeds: [embed] })
         }
 
         const msg = await message.channel.send({ embeds: [embed] })

@@ -18,6 +18,6 @@ module.exports = class extends Command {
     async run(message, ...args) {
         exec(args.join(' '), (error, stdout) => {
             const response = stdout || error;
-            message.channel.send({content: Discord.Formatters.codeBlock(response) })
+            await message.channel.send({content: Discord.Formatters.codeBlock(response) })
         })
     }}

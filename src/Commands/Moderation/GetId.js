@@ -17,8 +17,8 @@ module.exports = class extends Command {
         const member = new Util().findMember(this.client, message, target)
 
         if (!member) {
-            return message.channel.send({ content: 'Sorry, you have not provided a valid member.' })
+            return await message.channel.send({ content: 'Sorry, you have not provided a valid member.' })
         }
-        message.reply({ content: `${member.tag || member.user.tag}'s ID: \`${member.id}\`'` })
+        await message.reply({ content: `${member.tag || member.user.tag}'s ID: \`${member.id}\`'` })
     }
 }

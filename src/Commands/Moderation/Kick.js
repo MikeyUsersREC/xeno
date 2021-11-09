@@ -36,7 +36,7 @@ module.exports = class extends Command {
 
         console.log([member_role, target_role])
         if (target_role > member_role && !message.member === message.guild.owner) {
-            return message.channel.send({ content: 'You cannot kick this user since they are higher than you.'})
+            return await message.channel.send({ content: 'You cannot kick this user since they are higher than you.'})
         }
 
         const Embed = new Discord.MessageEmbed()
@@ -47,7 +47,7 @@ module.exports = class extends Command {
             .setColor(Util.getColor());
 
         if (target === message.guild.owner) {
-            return message.channel.send({ content: 'You are not permitted to kick the server owner.'})
+            return await message.channel.send({ content: 'You are not permitted to kick the server owner.'})
         }
 
         // if (Member.roles.highest.position >= message.guild.members.cache.get(this.client.user.id).roles.highest.position) {
@@ -57,9 +57,9 @@ module.exports = class extends Command {
 
         try {
             target.kick(`Requested by ${message.member.username}: ${reason}`)
-            message.channel.send({ embeds: [Embed]})
+            await message.channel.send({ embeds: [Embed]})
         } catch(err) {
-            message.channel.send({ content: 'An error has occured.' })
+            await message.channel.send({ content: 'An error has occured.' })
             console.error(err)
         }
     }

@@ -38,13 +38,13 @@ module.exports = class extends Command {
         console.log(id)
         console.log(typeof id)
 
-        let IdentifiedMessage = await message.channel.messages.fetch(id).catch(err => { message.channel.send('Invalid Message ID.')})
+        let IdentifiedMessage = await message.channel.messages.fetch(id).catch(err => { await message.channel.send('Invalid Message ID.')})
         
         console.log(IdentifiedMessage);
         console.log(typeof IdentifiedMessage)
 
         if (!IdentifiedMessage) {
-            return message.channel.send({ content:  'Sorry, the provided Message ID could not be found in the current channel.'})
+            return await await message.channel.send({ content:  'Sorry, the provided Message ID could not be found in the current channel.'})
         }
 
         console.log(IdentifiedMessage)
@@ -90,6 +90,6 @@ module.exports = class extends Command {
             .setThumbnail(IdentifiedMessage.author.avatarURL({ dynamic: true }))
             .setTimestamp();
         
-        message.channel.send({ embeds: [Embed]})
+            await message.channel.send({ embeds: [Embed]})
     }
 }

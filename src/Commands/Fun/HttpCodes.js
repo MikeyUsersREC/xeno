@@ -15,6 +15,6 @@ module.exports = class extends Command {
     async run(message, ...args) {
         const HttpCode = args[0]
 
-        message.channel.send({ content: `https://http.cat/${HttpCode}`})
+        await message.channel.send({ content: `https://http.cat/${HttpCode}`})
     }
 }

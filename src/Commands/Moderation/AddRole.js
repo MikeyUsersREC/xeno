@@ -26,18 +26,18 @@ module.exports = class extends Command {
         target = Util.findMember(this.client, message, target, false);
         role = message.guild.roles.cache.get(role) || message.mentions.roles.last() || null
         if (role === null) {
-            return message.channel.send({ content: 'Sorry, you have not provided a correct identifier for a role.'})
+            return await message.channel.send({ content: 'Sorry, you have not provided a correct identifier for a role.'})
         }
         
         if (role.position > message.member.roles.highest.position) {
-            return message.channel.send({ content: 'You cannot give a role higher than your own role.'})
+            return await message.channel.send({ content: 'You cannot give a role higher than your own role.'})
         }
 
         try {
             target.roles.add(role).then(response => console.log(response))
-            message.channel.send({ content: `Successfully given **${role.name}** to **${target.user.username}**.` })
+            await message.channel.send({ content: `Successfully given **${role.name}** to **${target.user.username}**.` })
         } catch(err) {
-            message.channel.send({ content: 'An error has occured that has prevented your command from running correctly.' })
+            await message.channel.send({ content: 'An error has occured that has prevented your command from running correctly.' })
             console.error(err)
         }
     }

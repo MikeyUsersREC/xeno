@@ -35,7 +35,7 @@ module.exports = class extends Command {
         const member = util.findMember(this.client, message, target, false)
 
         if (!member) {
-            return message.channel.send({ content: 'You have not entered a user object.'})
+            return await message.channel.send({ content: 'You have not entered a user object.'})
         }
         
         const roles = member.roles.cache.sort((a, b) => b.position - a.position).map(role => role.toString()).slice(0, -1)
@@ -67,6 +67,6 @@ module.exports = class extends Command {
             .setColor(member.displayHexColor || util.getColor())
     
 
-        message.channel.send({ embeds: [embed]})
+        await message.channel.send({ embeds: [embed]})
 }
 }

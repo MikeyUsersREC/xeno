@@ -32,9 +32,9 @@ module.exports = class extends Command {
                     `❯ The number is ${randomNumber}`
                 ].join('\n'));
 
-                message.channel.send({ embeds: [Embed]})
+                await message.channel.send({ embeds: [Embed]})
             } else {
-            message.channel.send({ content: 'You have not provided 2 numbers.'})
+                await message.channel.send({ content: 'You have not provided 2 numbers.'})
         }
     }
 }

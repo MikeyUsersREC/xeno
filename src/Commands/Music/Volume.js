@@ -15,11 +15,11 @@ module.exports = class extends Command {
 
         let volume = parseInt(args.join(''))
 
-        if (!message.member.voice.channel) return message.channel.send({ content: 'You are not in a voice channel!'})
+        if (!message.member.voice.channel) return await message.channel.send({ content: 'You are not in a voice channel!'})
 
         this.client.distube.setVolume(message, volume)
 
-        message.channel.send({ content: `Successfully set the volume to \`${volume}\``})
+        await message.channel.send({ content: `Successfully set the volume to \`${volume}\``})
     }
 
 

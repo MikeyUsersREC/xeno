@@ -29,8 +29,8 @@ module.exports = class extends Command {
             let selected = data[Math.floor(Math.random() * data.length)]
 
         if (selected)
-            return message.channel.send({ content: `https://imgur.com/${selected.hash}${selected.ext.replace(/\?.*/, '')}`})
+            return await message.channel.send({ content: `https://imgur.com/${selected.hash}${selected.ext.replace(/\?.*/, '')}`})
         else {
-            return message.channel.send({ content: 'An unknown error occured. Try running this command again and if this continues, contact Mikey#8970 for further support.'})
+            return await message.channel.send({ content: 'An unknown error occured. Try running this command again and if this continues, contact Mikey#8970 for further support.'})
         }    }
 }

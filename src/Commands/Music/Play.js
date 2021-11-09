@@ -13,7 +13,7 @@ module.exports = class extends Command {
     }
 
     async run(message, ...search) {
-        if (!message.member.voice.channel) return message.channel.send({ content: 'You are not in a voice channel!'})
+        if (!message.member.voice.channel) return await message.channel.send({ content: 'You are not in a voice channel!'})
 
         let query = search.join(' ')
 

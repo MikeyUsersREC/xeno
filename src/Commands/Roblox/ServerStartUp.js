@@ -25,7 +25,7 @@ module.exports = class extends Command {
             .setThumbnail(message.guild.iconURL({ dyanmic: true }))
             .setDescription('What channel would you like this to be sent into?');
         
-        message.channel.send({ embeds: [Embed]})
+        await message.channel.send({ embeds: [Embed]})
 
         let ssuChannel;
 
@@ -42,10 +42,10 @@ module.exports = class extends Command {
                     .setThumbnail(message.guild.iconURL({ dyanmic: true }))
                     .setDescription('What server code do you want to be displayed?');
 
-                message.channel.send({ embeds: [NewOptionEmbed]})
+               await message.channel.send({ embeds: [NewOptionEmbed]})
             
             } else {
-                return message.channel.send({ content: 'You have not put a correct channel name.'})
+                return await message.channel.send({ content: 'You have not put a correct channel name.'})
             }
         })
 
@@ -62,7 +62,7 @@ module.exports = class extends Command {
                 .addField('How do I join the SSU?', 'To join the SSU, you need to enter the Emergency Response: Liberty County game, press the Menu button in the top right corner, click the Servers tab and enter in the code below')
                 .addField('Server Code', `\`${optionMsg}\``);
             
-            ssuChannel.send(SSUEmbed).then().catch(err => message.channel.send({ content: err}))
+            await ssuChannel.send(SSUEmbed).then().catch(err => await message.channel.send({ content: err}))
 
         })
 

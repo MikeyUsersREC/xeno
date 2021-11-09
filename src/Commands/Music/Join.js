@@ -14,9 +14,9 @@ module.exports = class extends Command {
     async run(message, ...args) {
         const member = message.member;
 
-        if (!member.voice.channel) return message.channel.send({ content: '🚫 You are not connected to a voice channel!'})
+        if (!member.voice.channel) return await message.channel.send({ content: '🚫 You are not connected to a voice channel!'})
 
 
-        member.voice.channel.join().then(connection => message.channel.send({ content: `Successfully connected to **${member.voice.channel.name}**!`}))
+        member.voice.channel.join().then(connection => await message.channel.send({ content: `Successfully connected to **${member.voice.channel.name}**!`}))
     }
 }

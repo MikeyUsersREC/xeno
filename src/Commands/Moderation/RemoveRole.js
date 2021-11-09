@@ -26,21 +26,21 @@ module.exports = class extends Command {
         target = Util.findMember(this.client, message, target, false);
         const role = message.guild.roles.cache.get(rolename) || message.mentions.roles.last() || null
         if (role === null) {
-            return message.channel.send({ content: 'Sorry, you have not provided a correct identifier for a role.' })
+            return await message.channel.send({ content: 'Sorry, you have not provided a correct identifier for a role.' })
         }
         
         if (role.position > message.member.roles.highest.position) {
-            return message.channel.send({ content: 'You cannot give a role higher than your own role.'})
+            return await message.channel.send({ content: 'You cannot give a role higher than your own role.'})
         }
 
 
-        if (!target.roles.cache.has(rolename)) return message.channel.send({ content: 'This person does not have the role you have provided.'});
+        if (!target.roles.cache.has(rolename)) return await message.channel.send({ content: 'This person does not have the role you have provided.'});
 
         try {
             target.roles.remove(role)
-            message.channel.send({ content: `Successfully removed **${role.name}** from **${target.user.username}**.`})
+            await message.channel.send({ content: `Successfully removed **${role.name}** from **${target.user.username}**.`})
         } catch(err) {
-            message.channel.send({ content: 'An error has occured that has prevented your command from running correctly. Double-check that the user you are trying to remove a role from has that role before contacting support.'})
+            await message.channel.send({ content: 'An error has occured that has prevented your command from running correctly. Double-check that the user you are trying to remove a role from has that role before contacting support.'})
             console.error(err)
         }
     }

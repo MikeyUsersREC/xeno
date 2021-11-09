@@ -14,6 +14,6 @@ module.exports = class extends Command {
 
         const latency = msg.createdTimestamp - message.createdTimestamp
 
-        msg.edit({ content: `Latency: \`${latency}ms\`\nAPI Latency: \`${Math.round(this.client.ws.ping)}ms\``})
+        await msg.edit({ content: `Latency: \`${latency}ms\`\nAPI Latency: \`${Math.round(this.client.ws.ping)}ms\``})
     }
 }

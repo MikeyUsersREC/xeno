@@ -23,6 +23,6 @@ module.exports = class extends Command {
         message.channel.messages.fetch( { limit: limit })
             .then(messages => message.channel.bulkDelete(messages));
 
-        message.channel.send({ content: `Successfully deleted ${limit} messages, requested by ${message.author.username}.` })
+        await message.channel.send({ content: `Successfully deleted ${limit} messages, requested by ${message.author.username}.` })
     }
 }
