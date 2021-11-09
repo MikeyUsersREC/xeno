@@ -45,7 +45,7 @@ module.exports = class extends Command {
 
         if (args[0].toLowerCase() === 'roblox') {
             GuildProfile.extensions.forEach((dataset) => { if (dataset['name'] === 'Roblox') dataset['status'] = false})
-            await GuildProfile.save().catch(err => await message.channel.send({content: err}))
+            await GuildProfile.save().catch(err => message.channel.send({content: err}))
             return await message.channel.send({ content: 'Successfully disabled the Roblox extension.'})
         } else if (GuildProfile.extensions.forEach((dataset) => { if (dataset['name'] === 'Roblox' && dataset['status'] === false) return true})) {
             return await message.channel.send({ content: 'The Roblox extension is already disabled.'})
