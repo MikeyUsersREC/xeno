@@ -6,9 +6,7 @@ const Utils = require('../../Structures/Util')
 const Util = new Utils();
 const subreddits = [
     'memes',
-    'DeepFriedMemes',
     'bonehurtingjuice',
-    'surrealmemes',
     'dankmemes',
     'me_irl',
     'funny'
