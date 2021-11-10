@@ -25,7 +25,7 @@ module.exports = class extends Command {
     }
 
     async run(message) {
-        const data = await fetch(`https://imgur.com/r/${subreddits[Math.floor(Math.random() * subreddits.length)]}/top50.json`)
+        const data = await fetch(`https://imgur.com/r/${subreddits[Math.floor(Math.random() * subreddits.length)]}/top.json`)
             .then(response => response.json())
             .then(body => body.data);
             let selected = data[Math.floor(Math.random() * data.length)]
@@ -33,7 +33,11 @@ module.exports = class extends Command {
             if (selected) {
                 return await message.channel.send({ content: `https://imgur.com/${selected.hash}${selected.ext.replace(/\?.*/, '')}`})
             } else {
-                return await message.channel.send({ content: 'An unknown error occured. Try running this command again and if this continues, contact Mikey#8970 for further support.'})
-            }
+                selected = data[Math.floor(Math.random() * data.length)]
+                if (selected) {
+                    return await message.channel.send({ content: `https://imgur.com/${selected.hash}${selected.ext.replace(/\?.*/, '')}`})
+                } else {
+                return await message.channel.send({ content: 'An unknown error occured. Try running this command again and if this continues, contact `Mikey#8970` for further support.'})
+            }}
     }
     }
