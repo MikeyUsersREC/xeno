@@ -12,7 +12,7 @@ module.exports = class BotClient extends Client {
         this.validate(options)
 
 
-        this.distube = new DisTube.DisTube(this)
+        this.distube = new DisTube.DisTube(this, { leaveOnEmpty: true })
         this.commands = new Collection();
         this.aliases = new Collection();
         this.utils = new Util(this);
