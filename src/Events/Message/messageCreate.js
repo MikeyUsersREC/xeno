@@ -12,7 +12,7 @@ module.exports = class extends Event {
             return
         }
 
-        if (message.content.match(mentionRegex)) message.channel.send({ content: `My prefix for ${message.guild.name} is \`${this.client.prefix}\`.`})
+        if (message.content.match(mentionRegex)) await message.channel.send({ content: `My prefix for ${message.guild.name} is \`${this.client.prefix}\`.`})
 
         const prefix = message.content.match(mentionRegexPrefix) ?
             message.content.match(mentionRegexPrefix)[0] : this.client.prefix;
@@ -22,15 +22,15 @@ module.exports = class extends Event {
         if (!message.content.startsWith(prefix)) return;
         if (command) {
             if (command.ownerOnly && !this.client.utils.checkOwner(message.author.id)) {
-                return message.reply('Sorry, this command can only be used by the bot owners.')
+                return message.reply({ content: 'Sorry, this command can only be used by the bot owners.' })
             }
 
             if (command.guildOnly && !message.guild) {
-                return message.reply('Sorry, this command can only be used in a discord server.')
+                return message.reply({ content: 'Sorry, this command can only be used in a discord server.'})
             }
 
             if (command.nsfw && !message.channel.nsfw) {
-                return message.reply('Sorry, this command can only be used in a NSFW channel.')
+                return message.reply({ content: 'Sorry, this command can only be used in a NSFW channel.'})
             }
 
             let GuildProfile = await require('../../Structures/Database/Schemas/Guild').findOne({ GuildId: message.guild.id })
@@ -47,22 +47,22 @@ module.exports = class extends Event {
             }
 
             if (GuildProfile.extensions[0]['status'] === false && command.category === 'MeaxisNetwork') {
-                return message.channel.send({ content: 'This command is not enabled on this server.'})
+                return await message.channel.send({ content: 'This command is not enabled on this server.'})
             }
 
             if (GuildProfile.extensions[1]['status'] === false && command.category === 'Roblox') {
-                return message.channel.send({ content: 'This command is not enabled on this server.'})
+                return await message.channel.send({ content: 'This command is not enabled on this server.'})
             }
             
             if (command.args && !args.length) {
-                return message.reply(`Sorry, this command requires arguments to function. Usage ${command.usage ? `${command.usage}` : 'This command doesn\'t have a usage format.'}`)
+                return message.reply({ content: `Sorry, this command requires arguments to function. Usage ${command.usage ? `${command.usage}` : 'This command doesn\'t have a usage format.'}`})
             }
 			if (message.guild) {
 				const userPermCheck = command.userPerms ? this.client.defaultPerms.add(command.userPerms) : this.client.defaultPerms;
 				if (userPermCheck) {
 					const missing = message.channel.permissionsFor(message.member).missing(userPermCheck);
 					if (missing.length) {
-						return message.reply(`You are missing ${this.client.utils.formatArray(missing.map(this.client.utils.formatPerms))} permissions, you need them to use this command!`);
+						return message.reply({ content: `You are missing ${this.client.utils.formatArray(missing.map(this.client.utils.formatPerms))} permissions, you need them to use this command!`});
 					}
 				}
 
@@ -70,7 +70,7 @@ module.exports = class extends Event {
 				if (botPermCheck) {
 					const missing = message.channel.permissionsFor(this.client.user).missing(botPermCheck);
 					if (missing.length) {
-						return message.reply(`I am missing ${this.client.utils.formatArray(missing.map(this.client.utils.formatPerms))} permissions, I need them to run this command!`);
+						return message.reply({ content: `I am missing ${this.client.utils.formatArray(missing.map(this.client.utils.formatPerms))} permissions, I need them to run this command!`});
 					}
 				}
             }

@@ -25,6 +25,6 @@ module.exports = class extends Command {
             ]
         })
 
-        message.reply(`${invite}`)
+        message.reply({ content: `${invite}` })
     }
 }
