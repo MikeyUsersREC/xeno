@@ -45,6 +45,9 @@ module.exports = class extends Command {
             }
         }
 
+        if (content.highestTitleColor) {
+            Embed.setColor(content.highestTitleColor)
+        }
         let list = []
         for (let key of content.titles) {
             list.push(key['name'])
