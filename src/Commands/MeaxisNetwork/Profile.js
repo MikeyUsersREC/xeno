@@ -50,7 +50,7 @@ module.exports = class extends Command {
         }
         let list = []
         for (let key of content.titles) {
-            list.push(`[${key['level']}] ${key['name']}`)
+            list.push(`${key['name']}`)
         }
 
         if (list.length > 0) {
