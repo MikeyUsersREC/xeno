@@ -32,7 +32,7 @@ module.exports = class extends Command {
         
         let ssuChannel;
 
-        let components = (state) => [
+        const components = (state) => [
             new Discord.MessageActionRow().addComponents(
                 new Discord.MessageSelectMenu()
                     .setCustomId('ssu-menu-1')
