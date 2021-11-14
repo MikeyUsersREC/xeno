@@ -35,11 +35,12 @@ module.exports = class extends Command {
                     .setDisabled(state)
                     .addOptions(
                         message.guild.channels.cache.map(channel => {
+                            if (channel.type === 'text') {
                             return {
                                 label: channel.name,
                                 value: channel.name.toLowerCase(),
                                 description: channel.description || 'No description provided.'
-                            }
+                            }}
                         })
                     )
             )
@@ -52,8 +53,8 @@ module.exports = class extends Command {
         const collector = message.channel.createMessageComponentCollector( { filter, componentType: 'SELECT_MENU'} )
 
         collector.on('collect', (interaction) => {
-            ssuChannel = message.guild.channels.cache.find(channel => channel.name === msg.content.toLowerCase())
-                
+            ssuChannel = message.guild.channels.cache.find(channel => channel.name === interaction.selected.label.toLowerCase())
+            if (!ssuChannel) return console.log('ERR: Not found channel.')
                 const NewOptionEmbed = new Discord.MessageEmbed()
                     .setTitle('Server Start Up')
                     .setColor(Utils.getColor())
