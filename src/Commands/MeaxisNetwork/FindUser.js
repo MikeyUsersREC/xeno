@@ -67,7 +67,7 @@ module.exports = class extends Command {
 
                 let list = []
                 for (let key of content.titles) {
-                       list.push(key['name'])
+                    list.push(`[${key['level']}] ${key['name']}`)
                 }
     
                 if (list.length > 0) {
@@ -111,12 +111,12 @@ module.exports = class extends Command {
 
             let list = []
             for (let key of content.titles) {
-                list.push(key['name'])
-         }
+                list.push(`[${key['level']}] ${key['name']}`)
+            }
 
-         if (list.length > 0) {
-             Embed.addField('Titles', list.join(', '))
-         }
+            if (list.length > 0) {
+                Embed.addField('Titles', list.join(', '))
+            }
             console.log(Embed)
             
             await message.channel.send({ embeds: [Embed]})
