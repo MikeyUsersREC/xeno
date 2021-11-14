@@ -12,11 +12,11 @@ module.exports = class extends Command {
     }
 
     async run(message) {
-        if (!message.member.voice.channel) return message.channel.send({ content: 'You are not in a voice channel!'})
+        if (!message.member.voice.channel) return await message.channel.send({ content: 'You are not in a voice channel!'})
 
-        this.client.distube.skip(message)
+        this.client.distube.skip(message).catch(err => console.log(err))
 
-        message.channel.send({ content: 'Successfully skipped the current song!'})
+        await message.channel.send({ content: 'Successfully skipped the current song!'})
     }
 
 
