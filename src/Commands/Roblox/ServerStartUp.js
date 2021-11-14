@@ -53,7 +53,9 @@ module.exports = class extends Command {
         const collector = message.channel.createMessageComponentCollector( { filter, componentType: 'SELECT_MENU'} )
 
         collector.on('collect', (interaction) => {
-            ssuChannel = message.guild.channels.cache.find(channel => channel.name === interaction.selected.label.toLowerCase())
+            const [ value ] = interaction.values;
+
+            ssuChannel = message.guild.channels.cache.find(channel => channel.name === value.toLowerCase())
             if (!ssuChannel) return console.log('ERR: Not found channel.')
                 const NewOptionEmbed = new Discord.MessageEmbed()
                     .setTitle('Server Start Up')
