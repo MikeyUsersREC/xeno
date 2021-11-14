@@ -25,14 +25,34 @@ module.exports = class extends Command {
             .setThumbnail(message.guild.iconURL({ dyanmic: true }))
             .setDescription('What channel would you like this to be sent into?');
         
-        await message.channel.send({ embeds: [Embed]})
-
         let ssuChannel;
 
-        await message.channel.awaitMessages(msg => msg.author === message.author, { max: 1, time: 60000}).then(collected => {
-            let msg = collected.first()
-            if (message.guild.channels.cache.find(channel => channel.name === msg.content.toLowerCase())) {
-                ssuChannel = message.guild.channels.cache.find(channel => channel.name === msg.content.toLowerCase())
+        const components = (state) => [
+            new Discord.MessageActionRow().addComponents(
+                new Discord.MessageSelectMenu()
+                    .setCustomId('ssu-menu-1')
+                    .setPlaceholder('SSU Channel')
+                    .setDisabled(state)
+                    .addOptions(
+                        message.guild.channels.cache.map(channel => {
+                            return {
+                                label: channel.name,
+                                value: channel.name.toLowerCase(),
+                                description: channel.description || 'No description provided.'
+                            }
+                        })
+                    )
+            )
+        ]
+
+        const initalMessage = await message.channel.send( { embeds: [Embed], components: components(false) } )
+
+        const filter = (interaction) => interaction.user.id === message.author.id;
+
+        const collector = message.channel.createMessageComponentCollector( { filter, componentType: 'SELECT_MENU'} )
+
+        collector.on('collect', (interaction) => {
+            ssuChannel = message.guild.channels.cache.find(channel => channel.name === msg.content.toLowerCase())
                 
                 const NewOptionEmbed = new Discord.MessageEmbed()
                     .setTitle('Server Start Up')
@@ -42,15 +62,15 @@ module.exports = class extends Command {
                     .setThumbnail(message.guild.iconURL({ dyanmic: true }))
                     .setDescription('What server code do you want to be displayed?');
 
-                message.channel.send({ embeds: [NewOptionEmbed]})
-            
-            } else {
-                return message.channel.send({ content: 'You have not put a correct channel name.'})
-            }
+            message.channel.send({ embeds: [NewOptionEmbed]})
         })
 
-        await message.channel.awaitMessages(optionMsg => optionMsg.author === message.author, { max: 1, time: 60000}).then(collected => {
-            let optionMsg = collected.first()
+
+        const MessageFilter = (msg) => msg.author.id === message.author.id;
+
+        const MessageCollector = message.channel.createMessageCollector({ MessageFilter, time: 60000, max: 1});
+
+        MessageCollector.on('collect', (ServerCode) => {
 
             const SSUEmbed = new Discord.MessageEmbed()
                 .setTitle('Server Start Up')
@@ -60,13 +80,10 @@ module.exports = class extends Command {
                 .setThumbnail(message.guild.iconURL({ dyanmic: true }))
                 .addField('What is an SSU?', 'Server Start Ups, often abreviated as SSUs, are events to start the server up and get players in the server to roleplay. These are announced frequently throughout the day to keep activity.')
                 .addField('How do I join the SSU?', 'To join the SSU, you need to enter the Emergency Response: Liberty County game, press the Menu button in the top right corner, click the Servers tab and enter in the code below')
-                .addField('Server Code', `\`${optionMsg}\``);
+                .addField('Server Code', `\`${ServerCode.content}\``);
             
-            ssuChannel.send(SSUEmbed).then().catch(err => message.channel.send({ content: err}))
+            ssuChannel.send({ content: '@everyone', Embeds: [SSUEmbed] }).then().catch(err => message.channel.send({ content: err}))
 
         })
-
-
-
     }
 }

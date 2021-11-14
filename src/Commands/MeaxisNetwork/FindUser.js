@@ -112,7 +112,7 @@ module.exports = class extends Command {
 
             let list = []
             for (let key of content.titles) {
-                list.push(key['name'])
+                list.push(`[${key['flags'][0] || '-'}] ${key['name']}`)
             }
 
             if (list.length > 0) {
