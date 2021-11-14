@@ -43,7 +43,7 @@ module.exports = class extends Command {
                 console.log(url)
 
                 let content = await fetch(url)
-                    .then(content => content.json());
+                .then(content => content.json()).catch(err => { return message.channel.send('Invalid user.') })
                 
                 let Embed = new discord.MessageEmbed()
                     .setAuthor(message.author.username, message.author.avatarURL({ dynamic: true }))
@@ -81,7 +81,7 @@ module.exports = class extends Command {
             console.log(url)
 
             let content = await fetch(url)
-                .then(content => content.json()).catch(err => message.channel.send('Invalid user.'))
+                .then(content => content.json()).catch(err => { return message.channel.send('Invalid user.') })
             
             let Embed = new discord.MessageEmbed()
                 .setAuthor(message.author.username, message.author.avatarURL({ dynamic: true }))
@@ -125,8 +125,8 @@ module.exports = class extends Command {
             console.log(url)
 
             let content = await fetch(url)
-                .then(content => content.json());
-            
+            .then(content => content.json()).catch(err => { return message.channel.send('Invalid user.') })
+
             let Embed = new discord.MessageEmbed()
                 .setAuthor(message.author.username, message.author.avatarURL({ dynamic: true }))
                 .setColor(Utils.getColor())
