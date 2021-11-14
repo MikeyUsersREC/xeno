@@ -108,7 +108,7 @@ module.exports = class extends Command {
 
         const newFilter = (interaction) => interaction.user.id === message.author.id;
 
-        const newCollector = message.channel.createMessageComponentCollector( { filter, componentType: 'SELECT_MENU'} )
+        const newCollector = message.channel.createMessageComponentCollector( { newFilter, componentType: 'SELECT_MENU'} )
 
         newCollector.on('collect', (interaction) => {
             const [ value ] = interaction.values;
