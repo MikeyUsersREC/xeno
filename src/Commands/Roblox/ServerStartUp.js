@@ -79,55 +79,20 @@ module.exports = class extends Command {
                             inline: false
                         }
                     ]);
+
+            interaction.reply({embeds: [NewOptionEmbed]})
+        })
+
+        const SSUEmbed = new Discord.MessageEmbed()
+            .setTitle('Server Start Up')
+            .setColor(Utils.getColor())
+            .setAuthor(message.author.username, message.author.avatarURL({ dynamic: true }))
+            .setTimestamp()
+            .setThumbnail(message.guild.iconURL({ dyanmic: true }))
+            .addField('What is an SSU?', 'Server Start Ups, often abreviated as SSUs, are events to start the server up and get players in the server to roleplay. These are announced frequently throughout the day to keep activity.')
+            .addField('How do I join the SSU?', 'To join the SSU, you need to enter the Emergency Response: Liberty County game, press the Menu button in the top right corner, click the Servers tab and enter in the code below')
+            .addField('Server Code', `\`${ServerCode}\``);
         
-            components = (state) => [
-                new Discord.MessageActionRow().addComponents(
-                    new Discord.MessageSelectMenu()
-                        .setCustomId('ssu-menu-2')
-                        .setPlaceholder('Confirmation')
-                        .setDisabled(state)
-                        .addOptions([
-                            {
-                                label: 'Confirm',
-                                emoji: '✅',
-                                value: 'confirm',
-                                description: 'The SSU Embed will be sent in the designated channel.'
-                            },
-                            {
-                                label: 'Cancel',
-                                emoji: '❌',
-                                value: 'cancel',
-                                description: 'Cancel the SSU'
-                            }
-                        ])
-                )
-        ]
-
-            interaction.reply({ components: components(false), embeds: [NewOptionEmbed]})
-        })
-
-        const newFilter = (interaction) => interaction.user.id === message.author.id;
-
-        const newCollector = message.channel.createMessageComponentCollector( { newFilter, componentType: 'SELECT_MENU'} )
-
-        newCollector.on('collect', (interaction) => {
-            const [ value ] = interaction.values;
-            if (value === 'cancel') {
-                return interaction.reply({ content: 'Cancelled.' })
-            } else {
-                const SSUEmbed = new Discord.MessageEmbed()
-                .setTitle('Server Start Up')
-                .setColor(Utils.getColor())
-                .setAuthor(message.author.username, message.author.avatarURL({ dynamic: true }))
-                .setTimestamp()
-                .setThumbnail(message.guild.iconURL({ dyanmic: true }))
-                .addField('What is an SSU?', 'Server Start Ups, often abreviated as SSUs, are events to start the server up and get players in the server to roleplay. These are announced frequently throughout the day to keep activity.')
-                .addField('How do I join the SSU?', 'To join the SSU, you need to enter the Emergency Response: Liberty County game, press the Menu button in the top right corner, click the Servers tab and enter in the code below')
-                .addField('Server Code', `\`${ServerCode}\``);
-            
-                ssuChannel.send({ content: '@everyone', embeds: [SSUEmbed] }).then().catch(err => message.channel.send({ content: err}))
-                interaction.reply('Server Start Up announced!')
-            }
-        })
+        ssuChannel.send({ content: '@everyone', embeds: [SSUEmbed] }).then().catch(err => message.channel.send({ content: err}))
     }
 }
