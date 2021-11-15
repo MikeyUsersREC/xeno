@@ -23,6 +23,8 @@ module.exports = class extends Command {
         console.log(choice)
         console.log(query)
 
+        if (!query) return message.channel.send({ content: 'A query has not been provided'})
+
         if (choice.toLowerCase() !== 'discord' && choice.toLowerCase() !== 'username' && choice.toLowerCase() !== 'id') {
             return await message.channel.send({ content: 'You have not put a correct first argument. Correct arguments are: [\'discord\', \'username\']'})
         }
