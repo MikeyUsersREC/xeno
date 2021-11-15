@@ -40,11 +40,12 @@ module.exports = class extends Command {
                     .setDisabled(state)
                     .addOptions(
                         message.guild.channels.cache.map(channel => {
-                            return {
-                                label: channel.name,
-                                value: channel.name.toLowerCase(),
-                                description: channel.description || 'No description provided.'
-                            }}
+                            if (channel.type === 'text') {
+                                return {
+                                    label: channel.name,
+                                    value: channel.name.toLowerCase(),
+                                    description: channel.description || 'No description provided.'
+                            }}}
                         )
                     )
             )
