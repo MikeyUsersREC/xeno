@@ -39,16 +39,15 @@ module.exports = class extends Command {
                     .setPlaceholder('SSU Channel')
                     .setDisabled(state)
                     .addOptions(
-                        message.guild.channels.cache.map(channel => {
-                            if (channel.type === 'text') {
-                                return {
-                                    label: channel.name,
-                                    value: channel.name.toLowerCase(),
-                                    description: channel.description || 'No description provided.'
-                            }}}
+                        message.guild.channels.cache.find((channel) => channel.type === 'text').map(channel => {
+                            return {
+                                label: channel.name,
+                                value: channel.name.toLowerCase(),
+                                description: channel.description || 'No description provided.'
+                            }}
+                        )
                         )
                     )
-            )
         ]
 
         const initalMessage = await message.channel.send( { embeds: [Embed], components: components(false) } )
