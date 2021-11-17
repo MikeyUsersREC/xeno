@@ -39,7 +39,7 @@ module.exports = class extends Command {
                     .setPlaceholder('SSU Channel')
                     .setDisabled(state)
                     .addOptions(
-                        message.guild.channels.cache.find((channel) => channel.type === 'GUILD_TEXT').map(channel => {
+                        message.guild.channels.cache.map(channel => {
                             return {
                                 label: channel.name,
                                 value: channel.name.toLowerCase(),
@@ -60,7 +60,9 @@ module.exports = class extends Command {
             const [ value ] = interaction.values;
 
             ssuChannel = message.guild.channels.cache.find(channel => channel.name === value.toLowerCase())
+            
             if (!ssuChannel) return console.log('ERR: Not found channel.')
+            if (ssuChannel.type !== 'GUILD_TEXT') return message.channel.send('Not selected text channel.')
                 const NewOptionEmbed = new Discord.MessageEmbed()
                     .setTitle('Server Start Up')
                     .setColor(Utils.getColor())
