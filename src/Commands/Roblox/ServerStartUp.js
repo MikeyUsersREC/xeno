@@ -51,6 +51,8 @@ module.exports = class extends Command {
                     )
         ]
 
+        console.log(components(false).options)
+
         const initialMessage = await message.channel.send( { embeds: [Embed], components: components(false) } )
 
         const filter = (interaction) => interaction.user.id === message.author.id;
