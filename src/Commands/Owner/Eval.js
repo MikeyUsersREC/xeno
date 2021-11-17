@@ -20,7 +20,7 @@ module.exports = class extends Command {
             text = text
                 .replace(/`/g, `\`${String.fromCharCode(8203)}`)
                 .replace(/@/g, `@${String.fromCharCode(8203)}`)
-                .replace(new RegExp(this.client.token, 'gi'), '****')
+                .replace(new RegExp(this.client.token, 'gi'), 'lol no')
         }
         return text
     }
