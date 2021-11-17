@@ -112,6 +112,6 @@ module.exports = class Util {
     }
 
     findMember(client, message, target, option = true) {
-		return option == true ? message.mentions.members.last() || message.guild.members.cache.get(target) || message.guild.members.cache.get('name', target) || client.users.cache.get(target) || message.member : message.mentions.members.last() || message.guild.members.cache.get(target) || message.guild.members.cache.get('name', target) || message.guild.members.cache.find((member) => member.tag === target);
+		return option == true ? (message.mentions.members.last() || message.guild.members.cache.get(target) || message.guild.members.cache.get('name', target) || client.users.cache.get(target) || message.member) : (message.mentions.members.last() || message.guild.members.cache.get(target) || message.guild.members.cache.get('name', target) || message.guild.members.cache.find((member) => member.tag === target));
 	}
 }
