@@ -39,7 +39,7 @@ module.exports = class extends Command {
                     .setPlaceholder('SSU Channel')
                     .setDisabled(state)
                     .addOptions(
-                        message.guild.channels.cache.find((channel) => channel.type === 'text').map(channel => {
+                        message.guild.channels.cache.find((channel) => channel.type === 'GUILD_TEXT').map(channel => {
                             return {
                                 label: channel.name,
                                 value: channel.name.toLowerCase(),
