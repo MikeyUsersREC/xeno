@@ -32,7 +32,7 @@ module.exports = class extends Command {
         
         let ssuChannel;
 
-        let channels = message.guild.channels.fetch().filter((channel) => { channel.type == 'GUILD_TEXT'})
+        let channels = message.guild.channels.cache.filter((channel) => { channel.type === 'GUILD_TEXT'}).array()
 
         const components = (state) => [
             new Discord.MessageActionRow().addComponents(
