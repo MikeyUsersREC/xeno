@@ -32,6 +32,8 @@ module.exports = class extends Command {
         
         let ssuChannel;
 
+        let channels = message.guild.channels.cache.filter((channel) => { channel.type === 'GUILD_TEXT'})
+
         const components = (state) => [
             new Discord.MessageActionRow().addComponents(
                 new Discord.MessageSelectMenu()
@@ -39,15 +41,12 @@ module.exports = class extends Command {
                     .setPlaceholder('SSU Channel')
                     .setDisabled(state)
                     .addOptions(
-                        message.guild.channels.cache.map(channel => {
-                            
-                            if (channel.type === 'GUILD_TEXT') return {
+                        channels.map(channel => {
+                            return {
                                 label: channel.name,
                                 value: channel.name.toLowerCase(),
                                 description: channel.description || 'No description provided.'
-                            };
-                        } 
-                        )
+                            }})
                         )
                     )
         ]
