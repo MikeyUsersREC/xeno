@@ -17,6 +17,6 @@ module.exports = class extends Command {
         if (!member.voice.channel) return await message.channel.send({ content: '🚫 You are not connected to a voice channel!'})
 
 
-        this.client.distube.voices.join(member.voice.channel).then(connection => message.channel.send({ content: `Successfully connected to **${member.voice.channel.name}**!`}))
+        this.client.distube.voices.join(member.voice.channel).then(connection => message.channel.send({ content: `Successfully connected to **${member.voice.channel.name}**!`})).catch(err => { return message.channel.send('An error occured.') })
     }
 }

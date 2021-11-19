@@ -11,10 +11,10 @@ module.exports = class extends Command {
     }
 
     async run(message) {
-        if (!message.member.voice.channel) return message.channel.send({ content: 'You are not in a voice channel!'})
+        if (!message.member.voice.channel) return await message.channel.send({ content: 'You are not in a voice channel!'})
 
-        this.client.distube.setFilter(message, 'surround')
+        this.client.distube.setFilter(message, 'surround').catch(err => { return message.channel.send('An error occured.') })
 
-        message.channel.send({ content: 'The Surround filter has been toggled.' })
+        await message.channel.send({ content: 'The Surround filter has been toggled.' })
     }
 }
