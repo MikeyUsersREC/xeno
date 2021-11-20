@@ -13,7 +13,11 @@ module.exports = class extends Command {
     async run(message) {
         if (!message.member.voice.channel) return await message.channel.send({ content: 'You are not in a voice channel!'})
 
-        let mode = this.client.distube.setRepeatMode(message, 1).catch(err => { return message.channel.send('An error occured.') })
+        try {
+            let mode = this.client.distube.setRepeatMode(message, 1)
+        } catch {
+            return message.channel.send('An error occured')
+        }
         await message.channel.send({ content: mode === 1 ? 'Loop has been enabled.' : 'Loop has been disabled.'})
     }
 }

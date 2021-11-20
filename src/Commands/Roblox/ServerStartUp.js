@@ -40,22 +40,19 @@ module.exports = class extends Command {
                     .setCustomId('ssu-menu-1')
                     .setPlaceholder('SSU Channel')
                     .setDisabled(state)
+                    .addOptions(message.guild.channels.filter(channel => channel.send ? true : false).map(channel => {
+                        return {
+                            label: channel.name,
+                            value: channel.name.toLowerCase(),
+                            description: channel.description || 'No description available.'
+                        }
+                    })
+                    )
+            
                     )
         ]
 
-        let component = components(false)
-        for (channel of channels) {
-            component.addOption(
-                {
-                    label: channel.name,
-                    value: channel.name.toLowerCase(),
-                    description: channel.description || 'No description available.'
-                }
-            )
-        }
-
-
-        const initialMessage = await message.channel.send( { embeds: [Embed], components: component } )
+        const initialMessage = await message.channel.send( { embeds: [Embed], components: components(false) } )
 
         const filter = (interaction) => interaction.user.id === message.author.id;
 
