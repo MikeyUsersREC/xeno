@@ -40,7 +40,7 @@ module.exports = class extends Command {
                     .setCustomId('ssu-menu-1')
                     .setPlaceholder('SSU Channel')
                     .setDisabled(state)
-                    .addOptions(message.guild.channels.filter(channel => channel.send ? true : false).map(channel => {
+                    .addOptions(message.guild.channels.cache.filter(channel => channel.send ? true : false).map(channel => {
                         return {
                             label: channel.name,
                             value: channel.name.toLowerCase(),
