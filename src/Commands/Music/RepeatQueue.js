@@ -15,9 +15,10 @@ module.exports = class extends Command {
 
         try {
             let mode = this.client.distube.setRepeatMode(message, 2)
-        } catch {
+			await message.channel.send({ content: mode === 2 ? 'Queue-loop has been enabled.' : 'Queue-loop has been disabled.'})
+		} catch {
             return message.channel.send('An error occured')
         }
-        await message.channel.send({ content: mode === 2 ? 'Queue-loop has been enabled.' : 'Queue-loop has been disabled.'})
+
     }
 }
