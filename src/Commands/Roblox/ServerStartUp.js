@@ -34,6 +34,11 @@ module.exports = class extends Command {
 
         let channels = message.guild.channels.cache.filter((channel) => { channel.type === 'GUILD_TEXT'})
 
+        if (channels.length > 25) {
+            channels = message.guild.categories.cache.filter((category) => { category.channels.forEach((channel) => textChannelCount++); textChannelCount})
+
+        }
+
         const components = (state) => [
             new Discord.MessageActionRow().addComponents(
                 new Discord.MessageSelectMenu()
