@@ -36,7 +36,47 @@ module.exports = class extends Command {
         if (channels.length > 25) {
             message.channel.send({ content: 'You have more than 25 channels. What channel do you want to send this to?'})
 
-            let MessageCollector = message.channel.createMessageCollector()
+            let filter = (msg) => msg.author.id === message.author.id 
+            let MessageCollector = message.channel.createMessageCollector(filter)
+
+            MessageCollector.on('collect', (msg) => {
+                if (!channels.find(channel => channel.name === msg.content.toLowerCase())) return message.channel.send('You have not selected a valid channel.');
+                else {
+                    let ssuChannel = channels.find(channel => channel.name === msg.content.toLowerCase());
+
+                    const NewOptionEmbed = new Discord.MessageEmbed()
+                        .setTitle('Server Start Up')
+                        .setColor(Utils.getColor())
+                        .setAuthor(message.author.username, message.author.avatarURL({ dynamic: true }))
+                        .setTimestamp()
+                        .setThumbnail(message.guild.iconURL({ dyanmic: true }))
+                        .addFields([
+                            {
+                                name: 'Server Code',
+                                value: args[0],
+                                inline: false
+                            },
+                            {
+                                name: 'Channel',
+                                value: ssuChannel.toString(),
+                                inline: false
+                            }
+                    ]);
+
+                    const SSUEmbed = new Discord.MessageEmbed()
+                        .setTitle('Server Start Up')
+                        .setColor(Utils.getColor())
+                        .setAuthor(message.author.username, message.author.avatarURL({ dynamic: true }))
+                        .setTimestamp()
+                        .setThumbnail(message.guild.iconURL({ dyanmic: true }))
+                        .addField('What is an SSU?', 'Server Start Ups, often abreviated as SSUs, are events to start the server up and get players in the server to roleplay. These are announced frequently throughout the day to keep activity.')
+                        .addField('How do I join the SSU?', 'To join the SSU, you need to enter the Emergency Response: Liberty County game, press the Menu button in the top right corner, click the Servers tab and enter in the code below')
+                        .addField('Server Code', `\`${ServerCode}\``);
+                
+                    ssuChannel.send({ content: '@everyone', embeds: [SSUEmbed] }).then().catch(err => message.channel.send({ content: err}))
+                    return message.channel.send({embeds: [NewOptionEmbed]})
+                }
+            })
         }
 
         const components = (state) => [
