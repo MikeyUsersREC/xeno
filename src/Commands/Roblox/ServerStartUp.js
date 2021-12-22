@@ -33,7 +33,7 @@ module.exports = class extends Command {
         let ssuChannel;
 
         let channels = message.guild.channels.cache.filter((channel) => { channel.type === 'GUILD_TEXT' })
-        if (channels.length > 25) {
+        if (channels) {
             message.channel.send({ content: 'You have more than 25 channels. What channel do you want to send this to?'})
 
             let filter = (msg) => msg.author.id === message.author.id 
