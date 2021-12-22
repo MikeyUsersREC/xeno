@@ -37,7 +37,7 @@ module.exports = class extends Command {
             message.channel.send({ content: 'You have more than 25 channels. What channel do you want to send this to?'})
 
             let filter = (msg) => msg.member.id === message.member.id 
-            let MessageCollector = message.channel.createMessageCollector({ filter, time: 60000 })
+            let MessageCollector = message.channel.createMessageCollector({ filter, time: 60000, max: 1 })
 
             MessageCollector.on('collect', (msg) => {
                 if (!channels.find(channel => channel.name === msg.content.toLowerCase())) return message.channel.send('You have not selected a valid channel.');
