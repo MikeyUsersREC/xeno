@@ -56,9 +56,8 @@ module.exports = class extends Command {
             .addField('General', [
                 `**❯ Name:** ${message.guild.name}`,
                 `**❯ ID:** ${message.guild.id}`,
-                `**❯ Owner:** ${await message.guild.fetchOwner() || 'N/A'} \`${await message.guild.fetchOwner().id || "Not Found"}\``,
-                `**❯ Region:** ${regions[message.guild.region]}`,
-                `**❯ Boost Tier:** ${message.guild.premiumTier ? `Tier ${message.guild.premiumTier}` : 'None'}`,
+                `**❯ Owner:** ${await message.guild.fetchOwner() || 'N/A'} \`${message.guild.fetchOwner().then(owner => owner.id) || "Not Found"}\``,
+                `**❯ Boost Tier:** ${message.guild.premiumTier ? `Tier ${message.guild.premiumTier.replace("TIER_", "")}` : 'None'}`,
                 `**❯ Explicit Filter:** ${filterLevels[message.guild.explicitContentFilter]}`,
                 `**❯ Verification Level:** ${verificationLevels[message.guild.verificationLevel]}`,
                 `**❯ Time Created:** ${moment(message.guild.createdTimestamp).format('LT')} ${moment(message.guild.createdTimestamp).format('LL')} <t:${moment(message.guild.createdTimestamp).unix()}:R>`,
