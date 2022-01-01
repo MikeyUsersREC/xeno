@@ -32,71 +32,116 @@ module.exports = class extends Command {
         
         let ssuChannel;
 
-        let channels = message.guild.channels.cache.filter((channel) => { channel.type === 'GUILD_TEXT'})
+        let channels = message.guild.channels.cache.filter((channel) => { channel.type === 'GUILD_TEXT' })
+        if (channels) {
+            message.channel.send({ content: 'You have more than 25 channels. What channel do you want to send this to?'})
 
-        const components = (state) => [
-            new Discord.MessageActionRow().addComponents(
-                new Discord.MessageSelectMenu()
-                    .setCustomId('ssu-menu-1')
-                    .setPlaceholder('SSU Channel')
-                    .setDisabled(state)
-                    .addOptions(message.guild.channels.cache.filter(channel => channel.send ? true : false).map(channel => {
-                        return {
-                            label: channel.name,
-                            value: channel.name.toLowerCase(),
-                            description: channel.description || 'No description available.'
-                        }
-                    })
-                    )
-            
-                    )
-        ]
+            let filter = (msg) => msg.member.id === message.member.id 
+            let MessageCollector = message.channel.createMessageCollector({ filter, time: 60000, max: 1 })
 
-        const initialMessage = await message.channel.send( { embeds: [Embed], components: components(false) } )
+            MessageCollector.on('collect', (msg) => {
+                if (!channels.find(channel => channel.name === msg.content.toLowerCase())) return message.channel.send('You have not selected a valid channel.');
+                else {
+                    let ssuChannel = channels.find(channel => channel.name === msg.content.toLowerCase());
 
-        const filter = (interaction) => interaction.user.id === message.author.id;
+                    const NewOptionEmbed = new Discord.MessageEmbed()
+                        .setTitle('Server Start Up')
+                        .setColor(Utils.getColor())
+                        .setAuthor(message.author.username, message.author.avatarURL({ dynamic: true }))
+                        .setTimestamp()
+                        .setThumbnail(message.guild.iconURL({ dyanmic: true }))
+                        .addFields([
+                            {
+                                name: 'Server Code',
+                                value: args[0],
+                                inline: false
+                            },
+                            {
+                                name: 'Channel',
+                                value: ssuChannel.toString(),
+                                inline: false
+                            }
+                    ]);
 
-        const collector = initialMessage.createMessageComponentCollector( { filter, componentType: 'SELECT_MENU'} )
-
-        collector.on('collect', (interaction) => {
-            const [ value ] = interaction.values;
-
-            ssuChannel = message.guild.channels.cache.find(channel => channel.name === value.toLowerCase())
-            
-            if (!ssuChannel) return console.log('ERR: Not found channel.')
-            if (ssuChannel.type !== 'GUILD_TEXT') return message.channel.send('Not selected text channel.')
-                const NewOptionEmbed = new Discord.MessageEmbed()
+                    const SSUEmbed = new Discord.MessageEmbed()
+                        .setTitle('Server Start Up')
+                        .setColor(Utils.getColor())
+                        .setAuthor(message.author.username, message.author.avatarURL({ dynamic: true }))
+                        .setTimestamp()
+                        .setThumbnail(message.guild.iconURL({ dyanmic: true }))
+                        .addField('What is an SSU?', 'Server Start Ups, often abreviated as SSUs, are events to start the server up and get players in the server to roleplay. These are announced frequently throughout the day to keep activity.')
+                        .addField('How do I join the SSU?', 'To join the SSU, you need to enter the Emergency Response: Liberty County game, press the Menu button in the top right corner, click the Servers tab and enter in the code below')
+                        .addField('Server Code', `\`${ServerCode}\``);
+                
+                    ssuChannel.send({ content: '@everyone', embeds: [SSUEmbed] }).then().catch(err => message.channel.send({ content: err}))
+                    return message.channel.send({embeds: [NewOptionEmbed]})
+                }
+            })
+        } else {
+            const components = (state) => [
+                new Discord.MessageActionRow().addComponents(
+                    new Discord.MessageSelectMenu()
+                        .setCustomId('ssu-menu-1')
+                        .setPlaceholder('SSU Channel')
+                        .setDisabled(state)
+                        .addOptions(message.guild.channels.cache.filter(channel => channel.send ? true : false).map(channel => {
+                            return {
+                                label: channel.name,
+                                value: channel.name.toLowerCase(),
+                                description: channel.description || 'No description available.'
+                            }
+                        })
+                        )
+                
+                        )
+            ]
+    
+            const initialMessage = await message.channel.send( { embeds: [Embed], components: components(false) } )
+    
+            const filter = (interaction) => interaction.user.id === message.author.id;
+    
+            const collector = initialMessage.createMessageComponentCollector( { filter, componentType: 'SELECT_MENU'} )
+    
+            collector.on('collect', (interaction) => {
+                const [ value ] = interaction.values;
+    
+                ssuChannel = message.guild.channels.cache.find(channel => channel.name === value.toLowerCase())
+                
+                if (!ssuChannel) return console.log('ERR: Not found channel.')
+                if (ssuChannel.type !== 'GUILD_TEXT') return message.channel.send('Not selected text channel.')
+                    const NewOptionEmbed = new Discord.MessageEmbed()
+                        .setTitle('Server Start Up')
+                        .setColor(Utils.getColor())
+                        .setAuthor(message.author.username, message.author.avatarURL({ dynamic: true }))
+                        .setTimestamp()
+                        .setThumbnail(message.guild.iconURL({ dyanmic: true }))
+                        .addFields([
+                            {
+                                name: 'Server Code',
+                                value: args[0],
+                                inline: false
+                            },
+                            {
+                                name: 'Channel',
+                                value: ssuChannel.toString(),
+                                inline: false
+                            }
+                        ]);
+    
+    
+                const SSUEmbed = new Discord.MessageEmbed()
                     .setTitle('Server Start Up')
                     .setColor(Utils.getColor())
                     .setAuthor(message.author.username, message.author.avatarURL({ dynamic: true }))
                     .setTimestamp()
                     .setThumbnail(message.guild.iconURL({ dyanmic: true }))
-                    .addFields([
-                        {
-                            name: 'Server Code',
-                            value: args[0],
-                            inline: false
-                        },
-                        {
-                            name: 'Channel',
-                            value: ssuChannel.toString(),
-                            inline: false
-                        }
-                    ]);
-
-
-            const SSUEmbed = new Discord.MessageEmbed()
-                .setTitle('Server Start Up')
-                .setColor(Utils.getColor())
-                .setAuthor(message.author.username, message.author.avatarURL({ dynamic: true }))
-                .setTimestamp()
-                .setThumbnail(message.guild.iconURL({ dyanmic: true }))
-                .addField('What is an SSU?', 'Server Start Ups, often abreviated as SSUs, are events to start the server up and get players in the server to roleplay. These are announced frequently throughout the day to keep activity.')
-                .addField('How do I join the SSU?', 'To join the SSU, you need to enter the Emergency Response: Liberty County game, press the Menu button in the top right corner, click the Servers tab and enter in the code below')
-                .addField('Server Code', `\`${ServerCode}\``);
-            
-            ssuChannel.send({ content: '@everyone', embeds: [SSUEmbed] }).then().catch(err => message.channel.send({ content: err}))
-            interaction.reply({embeds: [NewOptionEmbed]})
-        })
+                    .addField('What is an SSU?', 'Server Start Ups, often abreviated as SSUs, are events to start the server up and get players in the server to roleplay. These are announced frequently throughout the day to keep activity.')
+                    .addField('How do I join the SSU?', 'To join the SSU, you need to enter the Emergency Response: Liberty County game, press the Menu button in the top right corner, click the Servers tab and enter in the code below')
+                    .addField('Server Code', `\`${ServerCode}\``);
+                
+                ssuChannel.send({ content: '@everyone', embeds: [SSUEmbed] }).then().catch(err => message.channel.send({ content: err}))
+                interaction.reply({embeds: [NewOptionEmbed]})
+            })
+        }
         }
 }

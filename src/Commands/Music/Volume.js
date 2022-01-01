@@ -17,9 +17,11 @@ module.exports = class extends Command {
 
         if (!message.member.voice.channel) return await message.channel.send({ content: 'You are not in a voice channel!'})
 
-        this.client.distube.setVolume(message, volume).catch(err => { return message.channel.send('An error occured.') })
-
-        await message.channel.send({ content: `Successfully set the volume to \`${volume}\``})
+		try {
+			this.client.distube.setVolume(message, volume)
+			await message.channel.send({ content: `Successfully set the volume to \`${volume}\``})
+		} catch { message.channel.send({content: 'An error occured.'}) }
+		
     }
 
 

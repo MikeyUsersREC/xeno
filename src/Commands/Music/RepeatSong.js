@@ -15,9 +15,9 @@ module.exports = class extends Command {
 
         try {
             let mode = this.client.distube.setRepeatMode(message, 1)
-        } catch {
+			await message.channel.send({ content: mode === 1 ? 'Loop has been enabled.' : 'Loop has been disabled.'})
+		} catch {
             return message.channel.send('An error occured')
         }
-        await message.channel.send({ content: mode === 1 ? 'Loop has been enabled.' : 'Loop has been disabled.'})
     }
 }

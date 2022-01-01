@@ -76,7 +76,13 @@ module.exports = class extends Event {
             }
 
             console.log(`Invoked ${command.name} by ${message.author.username}`)
-			command.run(message, ...args);
+		try {
+			command.run(message, ...args)
+                .catch(error => console.log(`command ${command.name} fucked up, just like #cd3nt5hnx7 wants to f- snowy`))
+		} catch (e) {
+			console.log(`command ${command.name} fucked up, just like #cd3nt5hnx7 wants to f- snowy`)	
+		}
+			
         }
     }
 }

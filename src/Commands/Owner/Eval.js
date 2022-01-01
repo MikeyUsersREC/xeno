@@ -31,6 +31,7 @@ module.exports = class extends Command {
         const msg = message;
 
         let code = args.join(' ');
+        code.replace('/```js\n/')
         code.replace('/```/')
         let evaluated;
         try {
