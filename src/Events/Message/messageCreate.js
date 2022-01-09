@@ -81,6 +81,9 @@ module.exports = class extends Event {
                 .catch(error => console.log(`command ${command.name} fucked up, just like #cd3nt5hnx7 wants to f- snowy`))
 		} catch (e) {
 			console.log(`command ${command.name} fucked up, just like #cd3nt5hnx7 wants to f- snowy`)	
+            if (message.author.id === '635119023918415874') {
+                message.channel.send(`\`${e}\``)
+            }
 		}
 			
         }
