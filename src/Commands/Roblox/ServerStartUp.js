@@ -34,15 +34,15 @@ module.exports = class extends Command {
 
         let channels = message.guild.channels.cache.filter((channel) => { channel.type === 'GUILD_TEXT' })
         if (channels) {
-            message.channel.send({ content: 'You have more than 25 channels. What channel do you want to send this to?'})
+            message.channel.send({ content: 'What channel do you want to send this to?'})
 
             let filter = (msg) => msg.member.id === message.member.id 
             let MessageCollector = message.channel.createMessageCollector({ filter, time: 60000, max: 1 })
 
             MessageCollector.on('collect', (msg) => {
-                if (!channels.find(channel => channel.toString() === msg.mentions[0])) return message.channel.send('You have not selected a valid channel.');
+                if (!channels.fetch(message.content)) return message.channel.send('You have not selected a valid channel.');
                 else {
-                    let ssuChannel = channels.find(channel => channel.name === msg.content.toLowerCase());
+                    let ssuChannel = channels.fetch(message.content)
 
                     const NewOptionEmbed = new Discord.MessageEmbed()
                         .setTitle('Server Start Up')
@@ -77,56 +77,6 @@ module.exports = class extends Command {
                     return message.channel.send({embeds: [NewOptionEmbed]})
                 }
             })
-        } else {
-            const components = (state) => [
-                new Discord.MessageActionRow().addComponents(
-                    new Discord.MessageSelectMenu()
-                        .setCustomId('ssu-menu-1')
-                        .setPlaceholder('SSU Channel')
-                        .setDisabled(state)
-                        .addOptions(message.guild.channels.cache.filter(channel => channel.send ? true : false).map(channel => {
-                            return {
-                                label: channel.name,
-                                value: channel.name.toLowerCase(),
-                                description: channel.description || 'No description available.'
-                            }
-                        })
-                        )
-                
-                        )
-            ]
-    
-            const initialMessage = await message.channel.send( { embeds: [Embed], components: components(false) } )
-    
-            const filter = (interaction) => interaction.user.id === message.author.id;
-    
-            const collector = initialMessage.createMessageComponentCollector( { filter, componentType: 'SELECT_MENU'} )
-    
-            collector.on('collect', (interaction) => {
-                const [ value ] = interaction.values;
-    
-                ssuChannel = message.guild.channels.cache.find(channel => channel.name === value.toLowerCase())
-                
-                if (!ssuChannel) return console.log('ERR: Not found channel.')
-                if (ssuChannel.type !== 'GUILD_TEXT') return message.channel.send('Not selected text channel.')
-                    const NewOptionEmbed = new Discord.MessageEmbed()
-                        .setTitle('Server Start Up')
-                        .setColor(Utils.getColor())
-                        .setAuthor(message.author.username, message.author.avatarURL({ dynamic: true }))
-                        .setTimestamp()
-                        .setThumbnail(message.guild.iconURL({ dyanmic: true }))
-                        .addFields([
-                            {
-                                name: 'Server Code',
-                                value: args[0],
-                                inline: false
-                            },
-                            {
-                                name: 'Channel',
-                                value: ssuChannel.toString(),
-                                inline: false
-                            }
-                        ]);
     
     
                 const SSUEmbed = new Discord.MessageEmbed()
@@ -141,7 +91,6 @@ module.exports = class extends Command {
                 
                 ssuChannel.send({ content: '@everyone', embeds: [SSUEmbed] }).then().catch(err => message.channel.send({ content: err}))
                 interaction.reply({embeds: [NewOptionEmbed]})
-            })
+            }
         }
-        }
-}
+    }
