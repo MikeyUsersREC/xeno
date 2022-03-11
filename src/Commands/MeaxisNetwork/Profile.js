@@ -36,18 +36,24 @@ module.exports = class extends Command {
         for (let key in content) {
             let value = content[key]
             console.log([key, value])
-            if (key !== null && key !== undefined && key !== 'titles' && value !== null) {
+            if (key !== null && key !== undefined && key !== 'titles' && key !== "joinedOn" && value !== null) {
                 console.log([key, typeof(key)])
                 console.log([value, typeof(value)])
                 Embed.addField(`${key}` ?? "Could not find variable", value.toString() ?? "null")
                 console.log(Embed)
 
             }
+            if (key == "joinedOn") {
+                Embed.addField(`${key}`, `<t:${value}:R>`)
+            }
         }
 
         if (content.highestTitleColor) {
             Embed.setColor(content.highestTitleColor)
         }
+
+
+
         let list = []
         for (let key of content.titles) {
             list.push(`${key['name']}`)
