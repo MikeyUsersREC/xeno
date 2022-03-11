@@ -44,7 +44,7 @@ module.exports = class extends Command {
 
             }
             if (key == "joinedOn") {
-                Embed.addField(`${key}`, `<t:${value}:R>`)
+                Embed.addField(`${key}`, `<t:${value}:R> \`${value}\``)
             }
         }
 
