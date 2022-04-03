@@ -4,6 +4,7 @@ const { promisify } = require('util');
 const glob = promisify(require('glob'));
 const Command = require('./Command.js')
 const Event = require('./Event.js')
+const discord = require('discord.js')
 
 module.exports = class Util {
     constructor(client) {
@@ -43,8 +44,8 @@ module.exports = class Util {
     }
 
     async loadCommands() {
-        this.client.commands = []
-        this.client.aliases =  []
+        this.client.commands = discord.Collection()
+        this.client.aliases =  discord.Collection()
         return glob(`${this.directory}Commands/**/*.js`).then(commands => {
             for (const commandFile of commands) {
                 delete require.cache[commandFile]
