@@ -24,6 +24,4 @@ try {
 } catch (e) {
     Sentry.captureException(e);
     console.log(e)
-} finally {
-    transaction.finish()
 }
