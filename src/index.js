@@ -23,7 +23,7 @@ try {
     client.start();
 } catch (e) {
     Sentry.captureException(e);
-    console.error(e)
+    console.log(e)
 } finally {
     transaction.finish()
 }
