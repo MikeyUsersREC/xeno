@@ -15,7 +15,7 @@ config['token'] = token
 const transaction = Sentry.startTransaction({
     op: "xenorun",
     name: "Running Xeno",
-  });
+});
   
 () => {
     try {
@@ -24,7 +24,5 @@ const transaction = Sentry.startTransaction({
         client.start();
     } catch (e) {
         Sentry.captureException(e);
-    } finally {
-        transaction.finish();
     }
 };
