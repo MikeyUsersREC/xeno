@@ -17,12 +17,13 @@ const transaction = Sentry.startTransaction({
     name: "Running Xeno",
 });
   
-() => {
-    try {
-        const client = new BotClient(config);
-        console.log(config)
-        client.start();
-    } catch (e) {
-        Sentry.captureException(e);
-    }
-};
+try {
+    const client = new BotClient(config);
+    console.log(config)
+    client.start();
+} catch (e) {
+    Sentry.captureException(e);
+    console.error(e)
+} finally {
+    transaction.finish()
+}
